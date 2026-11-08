@@ -10,9 +10,62 @@ body {
   color: #ffffff;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding-bottom: 40px;
+}
+
+/* NAVBAR HEADER */
+.workspace-header {
+  width: 100%;
+  max-width: 1050px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #2e3447;
+  margin-bottom: 25px;
+}
+
+.brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+.brand span {
+  color: #ff5e00;
+}
+
+.tool-switcher {
+  display: flex;
+  gap: 8px;
+  background: #1b1e29;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: #8a90a2;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.nav-btn.active {
+  background: #ff5e00;
+  color: #fff;
+}
+
+/* WORKSPACE CONTAINER */
+.tool-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .app-container {
@@ -23,7 +76,6 @@ body {
   align-items: flex-start;
 }
 
-/* Control Panel */
 .control-panel {
   flex: 1;
   background: #1b1e29;
@@ -31,7 +83,7 @@ body {
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 15px;
 }
 
 .control-panel h2 {
@@ -47,10 +99,47 @@ body {
   line-height: 1.4;
 }
 
-.upload-group {
+.tab-group, .layout-grid {
+  display: flex;
+  gap: 8px;
+  background: #0f1117;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+  background: transparent;
+}
+
+.tab-btn, .preset-btn {
+  flex: 1;
+  background: #0f1117;
+  border: 1px solid #2e3447;
+  color: #8a90a2;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.tab-btn.active, .preset-btn.active {
+  background: #ff5e00;
+  color: #fff;
+  border-color: #ff5e00;
+}
+
+.input-section, .upload-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
+}
+
+.hidden {
+  display: none !important;
 }
 
 .control-panel label {
@@ -61,50 +150,33 @@ body {
   font-weight: 600;
 }
 
+.control-panel input[type="text"], 
+.control-panel textarea,
 .control-panel input[type="file"],
 .control-panel select,
 .control-panel input[type="color"] {
   background: #0f1117;
   border: 1px solid #2e3447;
   color: #fff;
-  padding: 8px;
-  border-radius: 6px;
-  font-size: 0.85rem;
-}
-
-/* Layout Button Grid */
-.layout-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 6px;
-}
-
-.preset-btn {
-  background: #0f1117;
-  border: 1px solid #2e3447;
-  color: #8a90a2;
   padding: 9px;
   border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
+  font-size: 0.9rem;
 }
 
-.preset-btn.active {
-  background: #ff5e00;
-  color: #ffffff;
-  border-color: #ff5e00;
-}
-
-.style-controls {
+.image-controls-section, .style-controls {
   background: #0f1117;
   padding: 14px;
   border-radius: 8px;
+  border: 1px solid #2e3447;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #ff5e00;
+  font-size: 1.1rem;
 }
 
 .control-row {
@@ -122,44 +194,148 @@ body {
 .checkbox-row label {
   text-transform: none;
   font-size: 0.8rem;
-  cursor: pointer;
   color: #d1d5db;
 }
 
-button#download-btn {
+.action-btn {
   background: #ff5e00;
   color: white;
   border: none;
-  padding: 14px;
+  padding: 13px;
   border-radius: 6px;
   font-family: 'Anton', sans-serif;
   font-size: 1.1rem;
   letter-spacing: 1px;
   cursor: pointer;
+  margin-top: 5px;
 }
 
-button#download-btn:hover {
+.action-btn:hover {
   background: #e05300;
 }
 
-/* 3:4 PORTRAIT CANVAS (390px wide x 520px tall) */
+/* PREVIEW CANVAS (390px x 520px - 3:4 PORTRAIT) */
 .preview-wrapper {
   flex: 1;
   display: flex;
   justify-content: center;
 }
 
-.layout-canvas {
+.carousel-canvas, .layout-canvas {
   position: relative;
   width: 390px;
   height: 520px;
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+  background-color: #151821;
+}
+
+/* CAROUSEL CANVAS STYLES */
+.carousel-canvas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-canvas.mode-hook {
+  background: linear-gradient(135deg, #1b1e29 0%, #0a0c10 100%);
+}
+
+.bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.canvas-content {
+  position: relative;
+  z-index: 2;
+  padding: 25px;
+  width: 100%;
+}
+
+#view-hook {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-badge {
+  font-family: 'Anton', sans-serif;
+  background: #ff5e00;
+  color: #fff;
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+#view-hook h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  line-height: 1.05;
+}
+
+#view-hook p {
+  font-weight: 300;
+  color: #d1d5db;
+  font-size: 0.9rem;
+}
+
+#view-product {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.card-glass {
+  background: rgba(15, 17, 23, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 16px;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-glass h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.card-glass p {
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: #d1d5db;
+}
+
+.prod-badge {
+  font-family: 'Anton', sans-serif;
+  font-size: 0.8rem;
+  color: #ff5e00;
+}
+
+/* DESIGNER STUDIO CANVAS STYLES */
+.layout-canvas {
   display: grid;
   padding: 12px;
   gap: 10px;
-  transition: background 0.3s;
 }
 
 .photo-box {
@@ -169,7 +345,6 @@ button#download-btn:hover {
   width: 100%;
   height: 100%;
   z-index: 2;
-  transition: all 0.3s ease;
 }
 
 .photo-box img {
@@ -179,138 +354,40 @@ button#download-btn:hover {
   display: block;
 }
 
-.hidden {
-  display: none !important;
-}
-
-/* ----------------------------------
-   GEOMETRIC & MINIMAL BACKGROUNDS
------------------------------------ */
-.layout-canvas.bg-dark-clean {
-  background-color: #0f1117;
-}
-
+.layout-canvas.bg-dark-clean { background-color: #0f1117; }
 .layout-canvas.bg-cad-grid {
   background-color: #0d1017;
-  background-image: 
-    linear-gradient(rgba(255, 94, 0, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 94, 0, 0.1) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(255, 94, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 94, 0, 0.1) 1px, transparent 1px);
   background-size: 20px 20px;
 }
+.layout-canvas.bg-geo-diagonal { background: linear-gradient(135deg, #1b1e29 0%, #0a0c10 100%); }
+.layout-canvas.bg-spotlight { background: radial-gradient(circle at 50% 35%, #2a2f42 0%, #0f1117 80%); }
 
-.layout-canvas.bg-geo-diagonal {
-  background: linear-gradient(135deg, #1b1e29 0%, #0a0c10 100%);
-}
-.layout-canvas.bg-geo-diagonal .geo-shape.shape-1 {
-  position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 200px;
-  height: 200px;
-  background: rgba(255, 94, 0, 0.15);
-  transform: rotate(45deg);
-  z-index: 1;
-}
-
-.layout-canvas.bg-spotlight {
-  background: radial-gradient(circle at 50% 35%, #2a2f42 0%, #0f1117 80%);
-}
-
-/* ----------------------------------
-   MULTI-PHOTO LAYOUT STYLES
------------------------------------ */
-
-/* 1. Hero Split */
-.layout-canvas.hero-split {
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1.4fr 1fr;
-  padding-bottom: 90px; /* space for text overlay */
-}
+.layout-canvas.hero-split { grid-template-columns: 1fr 1fr; grid-template-rows: 1.4fr 1fr; padding-bottom: 90px; }
 .layout-canvas.hero-split .box-1 { grid-column: span 2; }
 
-/* 2. 3-Row Vertical Stack */
-.layout-canvas.vertical-stack {
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  padding-bottom: 90px;
-}
+.layout-canvas.vertical-stack { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr 1fr; padding-bottom: 90px; }
 
-/* 3. Diagonal Geo */
-.layout-canvas.diagonal-geo {
-  display: block;
-  position: relative;
-  padding: 15px;
-  padding-bottom: 90px;
-}
-.layout-canvas.diagonal-geo .box-1 {
-  width: 70%;
-  height: 60%;
-  clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
-}
-.layout-canvas.diagonal-geo .box-2 {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 45%;
-  height: 55%;
-  clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
-  border: 2px solid #ff5e00;
-}
+.layout-canvas.diagonal-geo { display: block; padding: 15px; padding-bottom: 90px; }
+.layout-canvas.diagonal-geo .box-1 { width: 70%; height: 60%; clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%); }
+.layout-canvas.diagonal-geo .box-2 { position: absolute; top: 15px; right: 15px; width: 45%; height: 55%; clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%); border: 2px solid #ff5e00; }
 .layout-canvas.diagonal-geo .box-3 { display: none; }
 
-/* 4. Offset Overlap */
-.layout-canvas.offset-overlap {
-  display: block;
-  position: relative;
-  padding: 20px;
-  padding-bottom: 90px;
-}
-.layout-canvas.offset-overlap .box-1 {
-  width: 75%;
-  height: 65%;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-}
-.layout-canvas.offset-overlap .box-2 {
-  position: absolute;
-  bottom: 100px;
-  right: 20px;
-  width: 55%;
-  height: 45%;
-  border: 3px solid #ff5e00;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-}
+.layout-canvas.offset-overlap { display: block; padding: 20px; padding-bottom: 90px; }
+.layout-canvas.offset-overlap .box-1 { width: 75%; height: 65%; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+.layout-canvas.offset-overlap .box-2 { position: absolute; bottom: 100px; right: 20px; width: 55%; height: 45%; border: 3px solid #ff5e00; box-shadow: 0 10px 25px rgba(0,0,0,0.6); }
 .layout-canvas.offset-overlap .box-3 { display: none; }
 
-/* 5. Minimal Frame */
-.layout-canvas.minimal-frame {
-  display: block;
-  padding: 25px;
-  padding-bottom: 95px;
-}
-.layout-canvas.minimal-frame .box-1 {
-  width: 100%;
-  height: 100%;
-  border: 2px solid rgba(255, 94, 0, 0.4);
-  padding: 6px;
-  background: #0f1117;
-}
-.layout-canvas.minimal-frame .box-2,
-.layout-canvas.minimal-frame .box-3 { display: none; }
+.layout-canvas.minimal-frame { display: block; padding: 25px; padding-bottom: 95px; }
+.layout-canvas.minimal-frame .box-1 { width: 100%; height: 100%; border: 2px solid rgba(255, 94, 0, 0.4); padding: 6px; background: #0f1117; }
+.layout-canvas.minimal-frame .box-2, .layout-canvas.minimal-frame .box-3 { display: none; }
 
-/* 6. 4-Grid Matrix */
-.layout-canvas.grid-4 {
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  padding-bottom: 90px;
-}
+.layout-canvas.grid-4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; padding-bottom: 90px; }
 .layout-canvas.grid-4 .box-4 { display: block; }
 
-/* CAROUSEL TEXT SAFE ZONE PROTECTION MASK */
 .safezone-mask {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0; left: 0; right: 0;
   height: 90px;
   background: linear-gradient(to top, rgba(15, 17, 23, 0.95) 0%, rgba(15, 17, 23, 0.6) 70%, transparent 100%);
   z-index: 10;
