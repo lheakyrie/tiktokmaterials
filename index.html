@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3D Print Multi-Photo Layout Generator - PinoyProto 3D</title>
+  <title>3D Model Layout Studio - PinoyProto 3D</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,57 +18,69 @@
   <div class="app-container">
     <!-- CONTROL PANEL -->
     <div class="control-panel">
-      <h2>Image Layout Generator</h2>
-      <p class="subtitle">Upload 2 or 3 photos of your 3D model and choose an auto-layout template.</p>
+      <h2>Image Designer Studio</h2>
+      <p class="subtitle">Design multi-photo layouts with geometric backgrounds optimized for carousel slides.</p>
       
       <!-- PHOTO UPLOADERS -->
       <div class="upload-group">
-        <label>Photo 1 (Main/Hero Image)</label>
+        <label>Photo 1 (Primary Model)</label>
         <input type="file" id="img-input-1" accept="image/*" />
 
-        <label>Photo 2</label>
+        <label>Photo 2 (Angle / Detail)</label>
         <input type="file" id="img-input-2" accept="image/*" />
 
-        <label>Photo 3 (Optional)</label>
+        <label>Photo 3 (Optional extra angle)</label>
         <input type="file" id="img-input-3" accept="image/*" />
       </div>
 
-      <!-- TEMPLATE LAYOUT SELECTOR -->
+      <!-- LAYOUT TEMPLATES -->
       <div class="layout-selection">
-        <label>Select Layout Style</label>
+        <label>Select Multi-Photo Layout</label>
         <div class="layout-grid">
-          <button class="preset-btn active" data-layout="hero-split">Hero Split (1 Top, 2 Bottom)</button>
-          <button class="preset-btn" data-layout="vertical-stack">Vertical Stack (3 Equal Rows)</button>
-          <button class="preset-btn" data-layout="grid-2col">2-Photo Side-by-Side</button>
-          <button class="preset-btn" data-layout="spotlight">Spotlight (Main + Floating Inset)</button>
+          <button class="preset-btn active" data-layout="hero-split">Hero Split</button>
+          <button class="preset-btn" data-layout="vertical-stack">3-Row Stack</button>
+          <button class="preset-btn" data-layout="diagonal-geo">Diagonal Geo</button>
+          <button class="preset-btn" data-layout="offset-overlap">Offset Overlap</button>
+          <button class="preset-btn" data-layout="minimal-frame">Minimal Frame</button>
+          <button class="preset-btn" data-layout="grid-4">4-Grid Matrix</button>
         </div>
       </div>
 
-      <!-- DESIGN CONTROLS -->
+      <!-- GEOMETRIC BACKGROUND & STYLING -->
       <div class="style-controls">
+        <label>Background Pattern</label>
+        <select id="bg-style-select">
+          <option value="bg-dark-clean">Minimal Dark Studio</option>
+          <option value="bg-cad-grid">CAD Blueprint Grid</option>
+          <option value="bg-geo-diagonal">Diagonal Slash & Accent</option>
+          <option value="bg-spotlight">Center Spotlight Radial</option>
+        </select>
+
         <div class="control-row">
-          <label>Border / Gap Width</label>
-          <input type="range" id="gap-slider" min="0" max="20" value="8" />
-        </div>
-        <div class="control-row">
-          <label>Accent Line Color</label>
+          <label>Accent Color</label>
           <input type="color" id="accent-color" value="#ff5e00" />
         </div>
+
         <div class="control-row checkbox-row">
-          <input type="checkbox" id="toggle-watermark" checked />
-          <label for="toggle-watermark">Show PinoyProto 3D Watermark Badge</label>
+          <input type="checkbox" id="toggle-safezone" checked />
+          <label for="toggle-safezone">Reserve Bottom Text Mask (Carousel Safe Area)</label>
         </div>
       </div>
 
-      <button id="download-btn">Download Designed Image (3:4 PNG)</button>
+      <button id="download-btn">Export Designed Image (3:4 PNG)</button>
     </div>
 
     <!-- PREVIEW CANVAS (3:4 PORTRAIT) -->
     <div class="preview-wrapper">
-      <div id="layout-canvas" class="layout-canvas hero-split">
+      <div id="layout-canvas" class="layout-canvas hero-split bg-dark-clean">
+        
+        <!-- Geometric Accent Shapes -->
+        <div class="geo-shape shape-1"></div>
+        <div class="geo-shape shape-2"></div>
+
         <!-- Photo Containers -->
         <div class="photo-box box-1">
-          <img id="prev-img-1" src="https://via.placeholder.com/600x800/1b1e29/fff?text=Upload+Photo+1" alt="Main Photo" />
+          <img id="prev-img-1" src="https://via.placeholder.com/600x800/1b1e29/fff?text=Upload+Photo+1" alt="Photo 1" />
         </div>
 
         <div class="photo-box box-2">
@@ -79,8 +91,14 @@
           <img id="prev-img-3" src="https://via.placeholder.com/600x800/292d3e/fff?text=Upload+Photo+3" alt="Photo 3" />
         </div>
 
-        <!-- Optional Watermark Badge -->
-        <div id="watermark-badge" class="watermark-badge">PINOYPROTO 3D</div>
+        <div class="photo-box box-4 hidden">
+          <img id="prev-img-4" src="https://via.placeholder.com/600x800/1e2230/fff?text=Photo+4" alt="Photo 4" />
+        </div>
+
+        <!-- Bottom Safe Zone Protection Mask -->
+        <div id="safezone-mask" class="safezone-mask">
+          <span>Carousel Text Overlay Safe Zone</span>
+        </div>
       </div>
     </div>
   </div>
