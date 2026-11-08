@@ -187,12 +187,6 @@ function applyActivePhotoTransforms() {
 const presetBtns = document.querySelectorAll('.preset-btn');
 const bgSelect = document.getElementById('bg-style-select');
 
-const prev1 = document.getElementById('prev-img-1');
-const prev2 = document.getElementById('prev-img-2');
-const prev3 = document.getElementById('prev-img-3');
-const prev4 = document.getElementById('prev-img-4');
-const prev5 = document.getElementById('prev-img-5');
-
 document.getElementById('img-input-1').addEventListener('change', (e) => loadImg(e, 1));
 document.getElementById('img-input-2').addEventListener('change', (e) => loadImg(e, 2));
 document.getElementById('img-input-3').addEventListener('change', (e) => loadImg(e, 3));
@@ -241,13 +235,13 @@ document.getElementById('accent-color').addEventListener('input', (e) => {
 document.getElementById('download-carousel-btn').addEventListener('click', () => {
   const canvasElement = document.getElementById('carousel-canvas');
 
-  // Temporarily remove active selection outline so it doesn't export in the PNG
+  // Temporarily remove active selection outline so it doesn't render in the PNG
   const activeBox = document.querySelector('.photo-box.active-box');
   if (activeBox) activeBox.classList.remove('active-box');
 
   html2canvas(canvasElement, {
-    scale: 3, // High-resolution export
-    backgroundColor: null, // Removes white background artifacting on rounded corners
+    scale: 3,
+    backgroundColor: null,
     useCORS: true,
     allowTaint: true,
     logging: false
@@ -258,7 +252,7 @@ document.getElementById('download-carousel-btn').addEventListener('click', () =>
     link.href = cvs.toDataURL('image/png');
     link.click();
 
-    // Re-restore active box highlight
+    // Restore active box highlight
     if (activeBox) activeBox.classList.add('active-box');
   });
 });
