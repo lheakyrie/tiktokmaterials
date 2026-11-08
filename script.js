@@ -93,7 +93,7 @@ function applyHookImageTransforms() {
   const dim = sliderDim.value;
 
   previewBg.style.transform = `scale(${scale}) translate(${panX}px, ${panY}px)`;
-  previewBg.style.filter = `blur(${blur}px)`;
+  previewBg.style.filter = `blur(${blur}px) opacity(${1 - dim})`;
   canvasOverlay.style.background = `rgba(0, 0, 0, ${dim})`;
 }
 
@@ -169,7 +169,11 @@ function applyActivePhotoTransforms() {
 
   img.style.objectFit = state.fit;
   img.style.transform = `scale(${state.zoom}) translate(${state.panX}px, ${state.panY}px)`;
-  img.style.filter = `blur(${state.blur}px) brightness(${1 - state.dim})`;
+  
+  // Directly set inline webkit & standard CSS filters
+  const filterString = `blur(${state.blur}px) brightness(${1 - state.dim})`;
+  img.style.filter = filterString;
+  img.style.webkitFilter = filterString;
 
   if (state.fit === 'contain') {
     blurBackdrop.style.display = 'block';
@@ -231,20 +235,27 @@ document.getElementById('accent-color').addEventListener('input', (e) => {
   document.querySelectorAll('.inset-stack-right .box-4, .inset-stack-right .box-5, .layout-3 .box-2').forEach(box => box.style.borderColor = color);
 });
 
-// EXPORT CANVAS AS PNG (FIXED WHITE CORNERS & ACCURATE CAPTURE)
+// EXPORT CANVAS AS PNG (WITH FORCED BLUR & RENDER SCALE = 4)
 document.getElementById('download-carousel-btn').addEventListener('click', () => {
   const canvasElement = document.getElementById('carousel-canvas');
 
-  // Temporarily remove active selection outline so it doesn't render in the PNG
+  // Temporarily hide active outline during screenshot
   const activeBox = document.querySelector('.photo-box.active-box');
   if (activeBox) activeBox.classList.remove('active-box');
 
   html2canvas(canvasElement, {
-    scale: 3,
-    backgroundColor: null,
+    scale: 4,               // High resolution 4K output
+    backgroundColor: null,  // Removes white corner artifacting
     useCORS: true,
     allowTaint: true,
-    logging: false
+    logging: false,
+    onclone: (clonedDoc) => {
+      // Ensure all image filters stay applied during cloning
+      const clonedBoxes = clonedDoc.querySelectorAll('.img-wrapper img, .blur-backdrop');
+      clonedBoxes.forEach(img => {
+        img.style.webkitFilter = img.style.filter;
+      });
+    }
   }).then((cvs) => {
     const link = document.createElement('a');
     const isHook = !viewHook.classList.contains('hidden');
@@ -252,7 +263,6 @@ document.getElementById('download-carousel-btn').addEventListener('click', () =>
     link.href = cvs.toDataURL('image/png');
     link.click();
 
-    // Restore active box highlight
     if (activeBox) activeBox.classList.add('active-box');
   });
 });
