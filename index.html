@@ -50,7 +50,7 @@
           <input type="text" id="input-prod-title" value="CUSTOM MECHANICAL BRACKET" />
 
           <label>Description / Specs</label>
-          <textarea id="input-prod-desc" rows="3">PETG Material | High Stress Resistance | 0.2mm Layer Height</textarea>
+          <textarea id="input-prod-desc" rows="2">PETG Material | High Stress Resistance | 0.2mm Layer Height</textarea>
 
           <label>Call to Action / Badge</label>
           <input type="text" id="input-prod-cta" value="AVAILABLE AT PINOYPROTO 3D" />
@@ -60,13 +60,13 @@
             <div class="section-title">Design Highlight Layouts</div>
 
             <div class="upload-group">
-              <label>Photo 1 (Sketch / Reference)</label>
+              <label>Photo 1 (Reference / Sketch)</label>
               <input type="file" id="img-input-1" accept="image/*" />
 
-              <label>Photo 2 (3D Model / Final Print)</label>
+              <label>Photo 2 (3D Model Render)</label>
               <input type="file" id="img-input-2" accept="image/*" />
 
-              <label>Photo 3 (Finished 3D Print / Main Showcase)</label>
+              <label>Photo 3 (Final 3D Print - Main Showcase)</label>
               <input type="file" id="img-input-3" accept="image/*" />
 
               <label>Photo 4 (Angle Inset 1 - Layout 2)</label>
@@ -78,8 +78,10 @@
 
             <label>Highlight Layout Templates</label>
             <div class="layout-grid">
-              <button class="preset-btn active" data-layout="layout-1">Layout 1: Before & After Split</button>
-              <button class="preset-btn" data-layout="layout-2">Layout 2: Sketch → Model → Print + Angles</button>
+              <button class="preset-btn active" data-layout="layout-1-vertical">Layout 1A: Before & After Split (Vertical)</button>
+              <button class="preset-btn" data-layout="layout-1-horizontal">Layout 1B: Before & After Stack (Horizontal)</button>
+              <button class="preset-btn" data-layout="layout-1-diagonal">Layout 1C: Before & After Diagonal Cut</button>
+              <button class="preset-btn" data-layout="layout-2">Layout 2: Sketch → Model → Large Print + Angles</button>
               <button class="preset-btn" data-layout="layout-3">Layout 3: Reference vs Final Print</button>
             </div>
 
@@ -103,7 +105,7 @@
 
       <!-- PREVIEW CANVAS AREA -->
       <div class="preview-wrapper">
-        <div id="carousel-canvas" class="carousel-canvas mode-hook layout-1 bg-dark-clean">
+        <div id="carousel-canvas" class="carousel-canvas mode-hook layout-1-vertical bg-dark-clean">
           <div id="canvas-overlay" class="overlay"></div>
           
           <!-- Hook Background -->
@@ -113,8 +115,8 @@
           <div id="layout-studio-container" class="layout-studio-container hidden">
             <!-- Photo Frames -->
             <div class="photo-box box-1">
-              <span class="photo-tag tag-sketch">BEFORE (SKETCH)</span>
-              <img id="prev-img-1" src="https://via.placeholder.com/600x800/1b1e29/fff?text=Client+Sketch" alt="Client Sketch" />
+              <span class="photo-tag tag-ref">REFERENCE</span>
+              <img id="prev-img-1" src="https://via.placeholder.com/600x800/1b1e29/fff?text=Reference+/+Sketch" alt="Reference / Sketch" />
             </div>
 
             <div class="photo-box box-2">
@@ -143,7 +145,7 @@
             <p id="preview-hook-sub">Swipe to see our recent 3D prints & custom models ➡️</p>
           </div>
 
-          <!-- PRODUCT SLIDE OVERLAY CARD -->
+          <!-- PRODUCT SLIDE OVERLAY CARD (COMPACT SIZE) -->
           <div id="view-product" class="canvas-content hidden">
             <div class="card-glass">
               <h2 id="preview-prod-title">CUSTOM MECHANICAL BRACKET</h2>
