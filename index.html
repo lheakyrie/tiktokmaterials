@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TikTok 3:4 Carousel Generator - PinoyProto 3D</title>
+  <title>TikTok Creator Workspace - PinoyProto 3D</title>
 
   <!-- Google Fonts: Anton, Bebas Neue, Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,93 +14,142 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-  <div class="app-container">
-    <!-- CONTROL PANEL -->
-    <div class="control-panel">
-      <h2>Carousel Builder (3:4)</h2>
-      
-      <!-- Slide Selection Tabs -->
-      <div class="tab-group">
-        <button id="tab-hook" class="tab-btn active">Slide 1 (Hook)</button>
-        <button id="tab-product" class="tab-btn">Product Slide</button>
-      </div>
+  
+  <!-- MAIN WORKSPACE HEADER -->
+  <header class="workspace-header">
+    <div class="brand">PINOYPROTO 3D <span>STUDIO</span></div>
+    <nav class="tool-switcher">
+      <button id="nav-carousel" class="nav-btn active">1. Carousel Builder</button>
+      <button id="nav-designer" class="nav-btn">2. Image Designer Studio</button>
+    </nav>
+  </header>
 
-      <!-- SLIDE 1 INPUTS -->
-      <div id="section-hook" class="input-section">
-        <label>Main Question / Hook</label>
-        <textarea id="input-hook-title" rows="2">NEED A 3D DESIGN FOR YOUR PROJECT?</textarea>
-
-        <label>Subtext / Lead-in</label>
-        <input type="text" id="input-hook-sub" value="Swipe to see our recent 3D prints & custom models ➡️" />
-
-        <label>Background Image (Optional)</label>
-        <input type="file" id="input-hook-bg" accept="image/*" />
-      </div>
-
-      <!-- PRODUCT SLIDE INPUTS -->
-      <div id="section-product" class="input-section hidden">
-        <label>Product / Project Name</label>
-        <input type="text" id="input-prod-title" value="CUSTOM MECHANICAL BRACKET" />
-
-        <label>Description / Specs</label>
-        <textarea id="input-prod-desc" rows="3">PETG Material | High Stress Resistance | 0.2mm Layer Height</textarea>
-
-        <label>Call to Action / Badge</label>
-        <input type="text" id="input-prod-cta" value="AVAILABLE AT PINOYPROTO 3D" />
-
-        <label>Upload Product Photo</label>
-        <input type="file" id="input-prod-img" accept="image/*" />
-      </div>
-
-      <!-- IMAGE ADJUSTMENT TOOLBAR -->
-      <div class="image-controls-section">
-        <div class="section-title">Image Layout & Adjustments</div>
+  <!-- SECTION 1: CAROUSEL BUILDER -->
+  <main id="section-carousel-tool" class="tool-section">
+    <div class="app-container">
+      <!-- CONTROL PANEL -->
+      <div class="control-panel">
+        <h2>Carousel Builder (3:4)</h2>
         
-        <div class="control-row">
-          <label>Zoom (Scale)</label>
-          <input type="range" id="input-img-zoom" min="1" max="2.5" step="0.05" value="1" />
+        <!-- Slide Selection Tabs -->
+        <div class="tab-group">
+          <button id="tab-hook" class="tab-btn active">Slide 1 (Hook)</button>
+          <button id="tab-product" class="tab-btn">Product Slide</button>
         </div>
 
-        <div class="control-row">
-          <label>Vertical Position</label>
-          <input type="range" id="input-img-pos-y" min="-100" max="100" step="1" value="0" />
+        <!-- SLIDE 1 INPUTS -->
+        <div id="section-hook" class="input-section">
+          <label>Main Question / Hook</label>
+          <textarea id="input-hook-title" rows="2">NEED A 3D DESIGN FOR YOUR PROJECT?</textarea>
+
+          <label>Subtext / Lead-in</label>
+          <input type="text" id="input-hook-sub" value="Swipe to see our recent 3D prints & custom models ➡️" />
+
+          <label>Background Image</label>
+          <input type="file" id="input-hook-bg" accept="image/*" />
         </div>
 
-        <div class="control-row">
-          <label>Background Dimming</label>
-          <input type="range" id="input-img-dim" min="0" max="0.9" step="0.05" value="0.4" />
-        </div>
-      </div>
+        <!-- PRODUCT SLIDE INPUTS -->
+        <div id="section-product" class="input-section hidden">
+          <label>Product / Project Name</label>
+          <input type="text" id="input-prod-title" value="CUSTOM MECHANICAL BRACKET" />
 
-      <button id="download-btn">Download This Slide (3:4 PNG)</button>
-    </div>
+          <label>Description / Specs</label>
+          <textarea id="input-prod-desc" rows="3">PETG Material | High Stress Resistance | 0.2mm Layer Height</textarea>
 
-    <!-- PREVIEW AREA -->
-    <div class="preview-wrapper">
-      <!-- 3:4 Aspect Ratio Canvas -->
-      <div id="carousel-canvas" class="carousel-canvas mode-hook">
-        <div id="canvas-overlay" class="overlay"></div>
-        <img id="preview-bg" src="" alt="Background/Product Image" class="bg-img hidden" />
+          <label>Call to Action / Badge</label>
+          <input type="text" id="input-prod-cta" value="AVAILABLE AT PINOYPROTO 3D" />
 
-        <!-- HOOK CONTENT (Slide 1) -->
-        <div id="view-hook" class="canvas-content">
-          <span class="brand-badge">PINOYPROTO 3D</span>
-          <h1 id="preview-hook-title">NEED A 3D DESIGN FOR YOUR PROJECT?</h1>
-          <p id="preview-hook-sub">Swipe to see our recent 3D prints & custom models ➡️</p>
+          <label>Upload Product Photo</label>
+          <input type="file" id="input-prod-img" accept="image/*" />
         </div>
 
-        <!-- PRODUCT CONTENT (Slide 2+) -->
-        <div id="view-product" class="canvas-content hidden">
-          <div class="card-glass">
-            <h2 id="preview-prod-title">CUSTOM MECHANICAL BRACKET</h2>
-            <p id="preview-prod-desc">PETG Material | High Stress Resistance | 0.2mm Layer Height</p>
-            <div class="prod-badge" id="preview-prod-cta">AVAILABLE AT PINOYPROTO 3D</div>
+        <!-- Quick Image Positioning -->
+        <div class="image-controls-section">
+          <div class="section-title">Quick Fit Controls</div>
+          <div class="control-row">
+            <label>Zoom</label>
+            <input type="range" id="input-img-zoom" min="1" max="2.5" step="0.05" value="1" />
+          </div>
+          <div class="control-row">
+            <label>Vertical Position</label>
+            <input type="range" id="input-img-pos-y" min="-100" max="100" step="1" value="0" />
+          </div>
+          <div class="control-row">
+            <label>Dim Overlay</label>
+            <input type="range" id="input-img-dim" min="0" max="0.9" step="0.05" value="0.4" />
           </div>
         </div>
 
+        <button id="download-btn">Download Slide (3:4 PNG)</button>
+      </div>
+
+      <!-- PREVIEW AREA -->
+      <div class="preview-wrapper">
+        <div id="carousel-canvas" class="carousel-canvas mode-hook">
+          <div id="canvas-overlay" class="overlay"></div>
+          <img id="preview-bg" src="" alt="Background/Product Image" class="bg-img hidden" />
+
+          <!-- HOOK CONTENT -->
+          <div id="view-hook" class="canvas-content">
+            <span class="brand-badge">PINOYPROTO 3D</span>
+            <h1 id="preview-hook-title">NEED A 3D DESIGN FOR YOUR PROJECT?</h1>
+            <p id="preview-hook-sub">Swipe to see our recent 3D prints & custom models ➡️</p>
+          </div>
+
+          <!-- PRODUCT CONTENT -->
+          <div id="view-product" class="canvas-content hidden">
+            <div class="card-glass">
+              <h2 id="preview-prod-title">CUSTOM MECHANICAL BRACKET</h2>
+              <p id="preview-prod-desc">PETG Material | High Stress Resistance | 0.2mm Layer Height</p>
+              <div class="prod-badge" id="preview-prod-cta">AVAILABLE AT PINOYPROTO 3D</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </main>
+
+
+  <!-- SECTION 2: IMAGE DESIGNER STUDIO -->
+  <main id="section-designer-tool" class="tool-section hidden">
+    <div class="app-container">
+      <div class="control-panel">
+        <h2>Image Designer Studio</h2>
+        <p class="tool-desc">Create grid collages, CAD render frames, and multi-angle photo layouts to use as carousel slides.</p>
+        
+        <label>Select Layout Style</label>
+        <div class="layout-selector">
+          <button class="layout-btn active" data-layout="single">Single Framed</button>
+          <button class="layout-btn" data-layout="grid2">2-Photo Split</button>
+          <button class="layout-btn" data-layout="grid4">4-Photo Grid</button>
+        </div>
+
+        <label>Accent Border Color</label>
+        <input type="color" id="designer-border-color" value="#ff5e00" />
+
+        <label>Upload Image 1 (Main/Top)</label>
+        <input type="file" id="designer-img-1" accept="image/*" />
+
+        <label>Upload Image 2 (Secondary/Bottom)</label>
+        <input type="file" id="designer-img-2" accept="image/*" />
+
+        <button id="download-designer-btn">Export Designed Image (PNG)</button>
+      </div>
+
+      <!-- DESIGNER PREVIEW CANVAS -->
+      <div class="preview-wrapper">
+        <div id="designer-canvas" class="designer-canvas layout-single">
+          <div class="design-frame frame-1">
+            <img id="des-img-preview-1" src="https://via.placeholder.com/600x800/1e1e24/fff?text=Upload+Main+Photo" alt="Frame 1" />
+          </div>
+          <div class="design-frame frame-2 hidden">
+            <img id="des-img-preview-2" src="https://via.placeholder.com/600x800/292d3e/fff?text=Upload+Second+Photo" alt="Frame 2" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
   <script src="script.js"></script>
 </body>
