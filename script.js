@@ -78,7 +78,7 @@ document.getElementById('label-select-1').addEventListener('change', (e) => { do
 document.getElementById('label-select-2').addEventListener('change', (e) => { document.getElementById('badge-tag-2').textContent = e.target.value; });
 document.getElementById('label-select-3').addEventListener('change', (e) => { document.getElementById('badge-tag-3').textContent = e.target.value; });
 
-// SLIDE 1 BACKGROUND UPLOAD & TRANSFORM CONTROLS
+// SLIDE 1 BACKGROUND CONTROLS
 const sliderZoom = document.getElementById('slider-zoom');
 const sliderPanX = document.getElementById('slider-pan-x');
 const sliderPanY = document.getElementById('slider-pan-y');
@@ -92,8 +92,12 @@ function applyHookImageTransforms() {
   const blur = sliderBlur.value;
   const dim = sliderDim.value;
 
-  previewBg.style.transform = `scale(${scale}) translate(${panX}px, ${panY}px)`;
-  previewBg.style.filter = `blur(${blur}px)`;
+  previewBg.style.transform = `scale(${scale}) translate(${panX}px, ${panY}px) translateZ(0)`;
+  
+  const filterStr = `blur(${blur}px)`;
+  previewBg.style.filter = filterStr;
+  previewBg.style.webkitFilter = filterStr;
+
   canvasOverlay.style.background = `rgba(0, 0, 0, ${dim})`;
 }
 
@@ -145,7 +149,6 @@ selectTargetBox.addEventListener('change', (e) => {
   setActivePhotoBox(parseInt(e.target.value));
 });
 
-// CANVAS CLICK TO SELECT FRAME
 document.querySelectorAll('.photo-box').forEach(box => {
   box.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -169,7 +172,10 @@ function applyActivePhotoTransforms() {
 
   img.style.objectFit = state.fit;
   img.style.transform = `scale(${state.zoom}) translate(${state.panX}px, ${state.panY}px)`;
-  img.style.filter = `blur(${state.blur}px) brightness(${1 - state.dim})`;
+  
+  const filterString = `blur(${state.blur}px) brightness(${1 - state.dim})`;
+  img.style.filter = filterString;
+  img.style.webkitFilter = filterString;
 
   if (state.fit === 'contain') {
     blurBackdrop.style.display = 'block';
@@ -183,7 +189,7 @@ function applyActivePhotoTransforms() {
   ctrl.addEventListener('change', applyActivePhotoTransforms);
 });
 
-// INTEGRATED LAYOUT STUDIO CONTROLS
+// LAYOUT SWITCHING
 const presetBtns = document.querySelectorAll('.preset-btn');
 const bgSelect = document.getElementById('bg-style-select');
 
@@ -231,13 +237,40 @@ document.getElementById('accent-color').addEventListener('input', (e) => {
   document.querySelectorAll('.inset-stack-right .box-4, .inset-stack-right .box-5, .layout-3 .box-2').forEach(box => box.style.borderColor = color);
 });
 
-// EXPORT CANVAS AS PNG
+// EXPORT FUNCTION (HIGH RES 4K OUTPUT, TRANSPARENT CORNERS, BLUR FIX)
 document.getElementById('download-carousel-btn').addEventListener('click', () => {
-  html2canvas(carouselCanvas, { scale: 2 }).then((cvs) => {
+  const canvasElement = document.getElementById('carousel-canvas');
+
+  const activeBox = document.querySelector('.photo-box.active-box');
+  if (activeBox) activeBox.classList.remove('active-box');
+
+  html2canvas(canvasElement, {
+    scale: 4,
+    backgroundColor: null,
+    useCORS: true,
+    allowTaint: true,
+    logging: false,
+    onclone: (clonedDoc) => {
+      const clonedHookBg = clonedDoc.getElementById('preview-bg');
+      if (clonedHookBg && previewBg.style.filter) {
+        clonedHookBg.style.filter = previewBg.style.filter;
+        clonedHookBg.style.webkitFilter = previewBg.style.webkitFilter;
+      }
+
+      const clonedImages = clonedDoc.querySelectorAll('.img-wrapper img, .blur-backdrop');
+      clonedImages.forEach(img => {
+        if (img.style.filter) {
+          img.style.webkitFilter = img.style.filter;
+        }
+      });
+    }
+  }).then((cvs) => {
     const link = document.createElement('a');
     const isHook = !viewHook.classList.contains('hidden');
     link.download = isHook ? 'carousel-slide-1-hook.png' : 'carousel-product-slide.png';
     link.href = cvs.toDataURL('image/png');
     link.click();
+
+    if (activeBox) activeBox.classList.add('active-box');
   });
 });
