@@ -10,9 +10,61 @@ body {
   color: #ffffff;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 40px;
+}
+
+/* HEADER & TOOL SWITCHER */
+.workspace-header {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 20px;
+  border-bottom: 1px solid #2e3447;
+  margin-bottom: 30px;
+}
+
+.brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+.brand span {
+  color: #ff5e00;
+}
+
+.tool-switcher {
+  display: flex;
+  gap: 10px;
+  background: #1b1e29;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: #8a90a2;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.nav-btn.active {
+  background: #ff5e00;
+  color: #fff;
+}
+
+/* APP CONTAINER */
+.tool-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .app-container {
@@ -23,7 +75,7 @@ body {
   align-items: flex-start;
 }
 
-/* Controls */
+/* CONTROLS */
 .control-panel {
   flex: 1;
   background: #1b1e29;
@@ -41,15 +93,21 @@ body {
   letter-spacing: 1px;
 }
 
-.tab-group {
+.tool-desc {
+  font-size: 0.85rem;
+  color: #a0a5b5;
+  line-height: 1.4;
+}
+
+.tab-group, .layout-selector {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   background: #0f1117;
   padding: 4px;
   border-radius: 8px;
 }
 
-.tab-btn {
+.tab-btn, .layout-btn {
   flex: 1;
   background: transparent;
   border: none;
@@ -57,12 +115,11 @@ body {
   padding: 8px;
   border-radius: 6px;
   cursor: pointer;
-  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
   font-weight: 600;
-  font-size: 0.85rem;
 }
 
-.tab-btn.active {
+.tab-btn.active, .layout-btn.active {
   background: #ff5e00;
   color: #fff;
 }
@@ -78,7 +135,7 @@ body {
 }
 
 .control-panel label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #a0a5b5;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -86,18 +143,16 @@ body {
 
 .control-panel input[type="text"], 
 .control-panel textarea,
-.control-panel input[type="file"] {
+.control-panel input[type="file"],
+.control-panel input[type="color"] {
   background: #0f1117;
   border: 1px solid #2e3447;
   color: #fff;
   padding: 10px;
   border-radius: 6px;
   font-size: 0.95rem;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
 }
 
-/* IMAGE ADJUSTMENTS TOOLBAR */
 .image-controls-section {
   background: #0f1117;
   padding: 14px;
@@ -112,7 +167,6 @@ body {
   font-family: 'Bebas Neue', sans-serif;
   color: #ff5e00;
   font-size: 1.1rem;
-  letter-spacing: 0.5px;
 }
 
 .control-row {
@@ -131,7 +185,7 @@ body {
   cursor: pointer;
 }
 
-button#download-btn {
+button#download-btn, button#download-designer-btn {
   background: #ff5e00;
   color: white;
   border: none;
@@ -144,21 +198,21 @@ button#download-btn {
   margin-top: 10px;
 }
 
-button#download-btn:hover {
+button#download-btn:hover, button#download-designer-btn:hover {
   background: #e05300;
 }
 
-/* PORTRAIT 3:4 Aspect Ratio Canvas (390px Wide x 520px Tall) */
+/* 3:4 CANVAS PREVIEW (390px x 520px) */
 .preview-wrapper {
   flex: 1;
   display: flex;
   justify-content: center;
 }
 
-.carousel-canvas {
+.carousel-canvas, .designer-canvas {
   position: relative;
   width: 390px;
-  height: 520px; /* 3:4 Vertical Ratio */
+  height: 520px;
   border-radius: 14px;
   overflow: hidden;
   background-color: #151821;
@@ -168,7 +222,6 @@ button#download-btn:hover {
   justify-content: center;
 }
 
-/* Canvas Mode Styling */
 .carousel-canvas.mode-hook {
   background: linear-gradient(135deg, #1b1e29 0%, #0a0c10 100%);
 }
@@ -180,8 +233,6 @@ button#download-btn:hover {
   position: absolute;
   top: 0;
   left: 0;
-  transition: transform 0.05s ease-out;
-  transform-origin: center center;
 }
 
 .overlay {
@@ -189,7 +240,6 @@ button#download-btn:hover {
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
   z-index: 1;
-  pointer-events: none;
 }
 
 .canvas-content {
@@ -199,7 +249,6 @@ button#download-btn:hover {
   width: 100%;
 }
 
-/* Slide 1 (Hook) Styles */
 #view-hook {
   text-align: center;
   display: flex;
@@ -222,20 +271,16 @@ button#download-btn:hover {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2.8rem;
   line-height: 1.05;
-  letter-spacing: 1px;
 }
 
 #view-hook p {
-  font-family: 'Montserrat', sans-serif;
   font-weight: 300;
   color: #d1d5db;
   font-size: 0.9rem;
 }
 
-/* Product Slide Styles */
 #view-product {
   display: flex;
-  justify-content: flex-start;
   align-items: flex-end;
   height: 100%;
 }
@@ -255,24 +300,53 @@ button#download-btn:hover {
 .card-glass h2 {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.8rem;
-  letter-spacing: 1px;
-  color: #fff;
   line-height: 1;
 }
 
 .card-glass p {
-  font-family: 'Montserrat', sans-serif;
   font-weight: 300;
   font-size: 0.85rem;
   color: #d1d5db;
-  line-height: 1.4;
 }
 
 .prod-badge {
   font-family: 'Anton', sans-serif;
-  align-self: flex-start;
-  margin-top: 4px;
   font-size: 0.8rem;
-  letter-spacing: 1px;
   color: #ff5e00;
+}
+
+/* DESIGNER CANVAS LAYOUT STYLES */
+.designer-canvas {
+  padding: 20px;
+  gap: 15px;
+  background: #0a0c10;
+}
+
+.designer-canvas.layout-single {
+  display: flex;
+}
+.designer-canvas.layout-single .frame-1 {
+  width: 100%;
+  height: 100%;
+  border: 4px solid #ff5e00;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.designer-canvas.layout-grid2 {
+  display: flex;
+  flex-direction: column;
+}
+.designer-canvas.layout-grid2 .design-frame {
+  flex: 1;
+  width: 100%;
+  border: 3px solid #ff5e00;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.design-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
