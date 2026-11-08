@@ -50,6 +50,17 @@ document.getElementById('input-prod-title').addEventListener('input', (e) => doc
 document.getElementById('input-prod-desc').addEventListener('input', (e) => document.getElementById('preview-prod-desc').textContent = e.target.value);
 document.getElementById('input-prod-cta').addEventListener('input', (e) => document.getElementById('preview-prod-cta').textContent = e.target.value);
 
+// DYNAMIC LABEL SELECTORS FOR BADGES
+document.getElementById('label-select-1').addEventListener('change', (e) => {
+  document.getElementById('badge-tag-1').textContent = e.target.value;
+});
+document.getElementById('label-select-2').addEventListener('change', (e) => {
+  document.getElementById('badge-tag-2').textContent = e.target.value;
+});
+document.getElementById('label-select-3').addEventListener('change', (e) => {
+  document.getElementById('badge-tag-3').textContent = e.target.value;
+});
+
 // HOOK BACKGROUND UPLOAD
 document.getElementById('input-hook-bg').addEventListener('change', (e) => {
   const file = e.target.files[0];
