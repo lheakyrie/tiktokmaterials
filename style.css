@@ -15,7 +15,6 @@ body {
   padding-bottom: 40px;
 }
 
-/* NAVBAR HEADER */
 .workspace-header {
   width: 100%;
   max-width: 1050px;
@@ -37,31 +36,6 @@ body {
   color: #ff5e00;
 }
 
-.tool-switcher {
-  display: flex;
-  gap: 8px;
-  background: #1b1e29;
-  padding: 4px;
-  border-radius: 8px;
-}
-
-.nav-btn {
-  background: transparent;
-  border: none;
-  color: #8a90a2;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.85rem;
-}
-
-.nav-btn.active {
-  background: #ff5e00;
-  color: #fff;
-}
-
-/* WORKSPACE CONTAINER */
 .tool-section {
   width: 100%;
   display: flex;
@@ -93,13 +67,7 @@ body {
   letter-spacing: 1px;
 }
 
-.subtitle {
-  font-size: 0.82rem;
-  color: #a0a5b5;
-  line-height: 1.4;
-}
-
-.tab-group, .layout-grid {
+.tab-group {
   display: flex;
   gap: 8px;
   background: #0f1117;
@@ -110,8 +78,7 @@ body {
 .layout-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 0;
-  background: transparent;
+  gap: 8px;
 }
 
 .tab-btn, .preset-btn {
@@ -135,7 +102,7 @@ body {
 .input-section, .upload-group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .hidden {
@@ -163,7 +130,7 @@ body {
   font-size: 0.9rem;
 }
 
-.image-controls-section, .style-controls {
+.image-controls-section {
   background: #0f1117;
   padding: 14px;
   border-radius: 8px;
@@ -177,24 +144,6 @@ body {
   font-family: 'Bebas Neue', sans-serif;
   color: #ff5e00;
   font-size: 1.1rem;
-}
-
-.control-row {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.checkbox-row {
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-}
-
-.checkbox-row label {
-  text-transform: none;
-  font-size: 0.8rem;
-  color: #d1d5db;
 }
 
 .action-btn {
@@ -221,7 +170,7 @@ body {
   justify-content: center;
 }
 
-.carousel-canvas, .layout-canvas {
+.carousel-canvas {
   position: relative;
   width: 390px;
   height: 520px;
@@ -231,15 +180,11 @@ body {
   background-color: #151821;
 }
 
-/* CAROUSEL CANVAS STYLES */
-.carousel-canvas {
+.carousel-canvas.mode-hook {
+  background: linear-gradient(135deg, #1b1e29 0%, #0a0c10 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.carousel-canvas.mode-hook {
-  background: linear-gradient(135deg, #1b1e29 0%, #0a0c10 100%);
 }
 
 .bg-img {
@@ -260,11 +205,12 @@ body {
 
 .canvas-content {
   position: relative;
-  z-index: 2;
+  z-index: 5;
   padding: 25px;
   width: 100%;
 }
 
+/* SLIDE 1 HOOK STYLES */
 #view-hook {
   text-align: center;
   display: flex;
@@ -295,6 +241,7 @@ body {
   font-size: 0.9rem;
 }
 
+/* PRODUCT SLIDE CARD OVERLAY */
 #view-product {
   display: flex;
   align-items: flex-end;
@@ -302,7 +249,7 @@ body {
 }
 
 .card-glass {
-  background: rgba(15, 17, 23, 0.85);
+  background: rgba(15, 17, 23, 0.88);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 16px;
@@ -331,11 +278,15 @@ body {
   color: #ff5e00;
 }
 
-/* DESIGNER STUDIO CANVAS STYLES */
-.layout-canvas {
+/* INTEGRATED LAYOUT STUDIO CANVAS RULES */
+.layout-studio-container {
+  position: absolute;
+  inset: 0;
   display: grid;
   padding: 12px;
   gap: 10px;
+  z-index: 2;
+  padding-bottom: 120px; /* Reserves bottom space for product glass card */
 }
 
 .photo-box {
@@ -344,7 +295,6 @@ body {
   border-radius: 8px;
   width: 100%;
   height: 100%;
-  z-index: 2;
 }
 
 .photo-box img {
@@ -354,54 +304,35 @@ body {
   display: block;
 }
 
-.layout-canvas.bg-dark-clean { background-color: #0f1117; }
-.layout-canvas.bg-cad-grid {
+/* Background Patterns */
+.carousel-canvas.bg-dark-clean { background-color: #0f1117; }
+.carousel-canvas.bg-cad-grid {
   background-color: #0d1017;
-  background-image: linear-gradient(rgba(255, 94, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 94, 0, 0.1) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(255, 94, 0, 0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 94, 0, 0.12) 1px, transparent 1px);
   background-size: 20px 20px;
 }
-.layout-canvas.bg-geo-diagonal { background: linear-gradient(135deg, #1b1e29 0%, #0a0c10 100%); }
-.layout-canvas.bg-spotlight { background: radial-gradient(circle at 50% 35%, #2a2f42 0%, #0f1117 80%); }
+.carousel-canvas.bg-geo-diagonal { background: linear-gradient(135deg, #1b1e29 0%, #0a0c10 100%); }
+.carousel-canvas.bg-spotlight { background: radial-gradient(circle at 50% 35%, #2a2f42 0%, #0f1117 80%); }
 
-.layout-canvas.hero-split { grid-template-columns: 1fr 1fr; grid-template-rows: 1.4fr 1fr; padding-bottom: 90px; }
-.layout-canvas.hero-split .box-1 { grid-column: span 2; }
+/* Layout Grid Templates */
+.carousel-canvas.hero-split .layout-studio-container { grid-template-columns: 1fr 1fr; grid-template-rows: 1.4fr 1fr; }
+.carousel-canvas.hero-split .box-1 { grid-column: span 2; }
 
-.layout-canvas.vertical-stack { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr 1fr; padding-bottom: 90px; }
+.carousel-canvas.vertical-stack .layout-studio-container { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr 1fr; }
 
-.layout-canvas.diagonal-geo { display: block; padding: 15px; padding-bottom: 90px; }
-.layout-canvas.diagonal-geo .box-1 { width: 70%; height: 60%; clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%); }
-.layout-canvas.diagonal-geo .box-2 { position: absolute; top: 15px; right: 15px; width: 45%; height: 55%; clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%); border: 2px solid #ff5e00; }
-.layout-canvas.diagonal-geo .box-3 { display: none; }
+.carousel-canvas.diagonal-geo .layout-studio-container { display: block; padding: 15px; padding-bottom: 120px; }
+.carousel-canvas.diagonal-geo .box-1 { width: 70%; height: 60%; clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%); }
+.carousel-canvas.diagonal-geo .box-2 { position: absolute; top: 15px; right: 15px; width: 45%; height: 55%; clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%); border: 2px solid #ff5e00; }
+.carousel-canvas.diagonal-geo .box-3 { display: none; }
 
-.layout-canvas.offset-overlap { display: block; padding: 20px; padding-bottom: 90px; }
-.layout-canvas.offset-overlap .box-1 { width: 75%; height: 65%; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
-.layout-canvas.offset-overlap .box-2 { position: absolute; bottom: 100px; right: 20px; width: 55%; height: 45%; border: 3px solid #ff5e00; box-shadow: 0 10px 25px rgba(0,0,0,0.6); }
-.layout-canvas.offset-overlap .box-3 { display: none; }
+.carousel-canvas.offset-overlap .layout-studio-container { display: block; padding: 20px; padding-bottom: 120px; }
+.carousel-canvas.offset-overlap .box-1 { width: 75%; height: 65%; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+.carousel-canvas.offset-overlap .box-2 { position: absolute; bottom: 125px; right: 20px; width: 55%; height: 45%; border: 3px solid #ff5e00; box-shadow: 0 10px 25px rgba(0,0,0,0.6); }
+.carousel-canvas.offset-overlap .box-3 { display: none; }
 
-.layout-canvas.minimal-frame { display: block; padding: 25px; padding-bottom: 95px; }
-.layout-canvas.minimal-frame .box-1 { width: 100%; height: 100%; border: 2px solid rgba(255, 94, 0, 0.4); padding: 6px; background: #0f1117; }
-.layout-canvas.minimal-frame .box-2, .layout-canvas.minimal-frame .box-3 { display: none; }
+.carousel-canvas.minimal-frame .layout-studio-container { display: block; padding: 25px; padding-bottom: 125px; }
+.carousel-canvas.minimal-frame .box-1 { width: 100%; height: 100%; border: 2px solid rgba(255, 94, 0, 0.4); padding: 6px; background: #0f1117; }
+.carousel-canvas.minimal-frame .box-2, .carousel-canvas.minimal-frame .box-3 { display: none; }
 
-.layout-canvas.grid-4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; padding-bottom: 90px; }
-.layout-canvas.grid-4 .box-4 { display: block; }
-
-.safezone-mask {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 90px;
-  background: linear-gradient(to top, rgba(15, 17, 23, 0.95) 0%, rgba(15, 17, 23, 0.6) 70%, transparent 100%);
-  z-index: 10;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 10px;
-  border-top: 1px dashed rgba(255, 94, 0, 0.5);
-}
-
-.safezone-mask span {
-  font-size: 0.65rem;
-  color: #ff5e00;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
+.carousel-canvas.grid-4 .layout-studio-container { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+.carousel-canvas.grid-4 .box-4 { display: block; }
