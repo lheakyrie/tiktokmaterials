@@ -7,9 +7,29 @@ const viewHook = document.getElementById('view-hook');
 const viewProduct = document.getElementById('view-product');
 const canvas = document.getElementById('carousel-canvas');
 const previewBg = document.getElementById('preview-bg');
+const overlay = document.getElementById('canvas-overlay');
+
+// Image adjustment inputs
+const inputZoom = document.getElementById('input-img-zoom');
+const inputPosY = document.getElementById('input-img-pos-y');
+const inputDim = document.getElementById('input-img-dim');
 
 let hookBgUrl = '';
 let prodImgUrl = '';
+
+// Update CSS image transforms
+function updateImageTransform() {
+  const scale = inputZoom.value;
+  const posY = inputPosY.value;
+  previewBg.style.transform = `scale(${scale}) translateY(${posY}px)`;
+}
+
+inputZoom.addEventListener('input', updateImageTransform);
+inputPosY.addEventListener('input', updateImageTransform);
+
+inputDim.addEventListener('input', (e) => {
+  overlay.style.backgroundColor = `rgba(0, 0, 0, ${e.target.value})`;
+});
 
 // Tab Switcher logic
 tabHook.addEventListener('click', () => {
@@ -92,7 +112,7 @@ document.getElementById('input-prod-img').addEventListener('change', (e) => {
   }
 });
 
-// Download Canvas as high-res 3:4 PNG (780x1040px output)
+// Download Canvas as high-res 3:4 PNG
 document.getElementById('download-btn').addEventListener('click', () => {
   html2canvas(canvas, { scale: 2 }).then((cvs) => {
     const link = document.createElement('a');
