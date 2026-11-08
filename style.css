@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -35,8 +35,10 @@ body {
 }
 
 .control-panel h2 {
+  font-family: 'Bebas Neue', sans-serif;
   color: #ff5e00;
-  font-size: 1.3rem;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
 }
 
 .tab-group {
@@ -55,7 +57,9 @@ body {
   padding: 8px;
   border-radius: 6px;
   cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
+  font-size: 0.85rem;
 }
 
 .tab-btn.active {
@@ -74,8 +78,10 @@ body {
 }
 
 .control-panel label {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #a0a5b5;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .control-panel input, .control-panel textarea {
@@ -85,6 +91,8 @@ body {
   padding: 10px;
   border-radius: 6px;
   font-size: 0.95rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
 }
 
 button#download-btn {
@@ -93,7 +101,9 @@ button#download-btn {
   border: none;
   padding: 12px;
   border-radius: 6px;
-  font-weight: bold;
+  font-family: 'Anton', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
   cursor: pointer;
   margin-top: 10px;
 }
@@ -102,7 +112,7 @@ button#download-btn:hover {
   background: #e05300;
 }
 
-/* 4:3 Aspect Ratio Canvas (600px x 450px Preview) */
+/* 4:3 Aspect Ratio Canvas (Preview Box) */
 .preview-wrapper {
   flex: 1.2;
   display: flex;
@@ -160,24 +170,27 @@ button#download-btn:hover {
 }
 
 .brand-badge {
+  font-family: 'Anton', sans-serif;
   background: #ff5e00;
   color: #fff;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 1px;
-  padding: 5px 12px;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
   border-radius: 20px;
 }
 
 #view-hook h1 {
-  font-size: 2rem;
-  line-height: 1.25;
-  font-weight: 800;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  line-height: 1.05;
+  letter-spacing: 1px;
 }
 
 #view-hook p {
-  color: #c2c7d6;
-  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  color: #d1d5db;
+  font-size: 0.95rem;
 }
 
 /* Product Slide Styles */
@@ -189,7 +202,7 @@ button#download-btn:hover {
 }
 
 .card-glass {
-  background: rgba(15, 17, 23, 0.75);
+  background: rgba(15, 17, 23, 0.8);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 16px 20px;
@@ -201,19 +214,26 @@ button#download-btn:hover {
 }
 
 .card-glass h2 {
-  font-size: 1.25rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
   color: #fff;
+  line-height: 1;
 }
 
 .card-glass p {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
   font-size: 0.85rem;
-  color: #b0b5c5;
+  color: #d1d5db;
+  line-height: 1.4;
 }
 
 .prod-badge {
+  font-family: 'Anton', sans-serif;
   align-self: flex-start;
   margin-top: 4px;
-  font-size: 0.75rem;
-  font-weight: bold;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
   color: #ff5e00;
 }
