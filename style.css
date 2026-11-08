@@ -338,10 +338,15 @@ body {
 .carousel-canvas.layout-1 .layout-studio-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
   gap: 8px;
 }
 .carousel-canvas.layout-1 .box-1,
-.carousel-canvas.layout-1 .box-2 { display: block; }
+.carousel-canvas.layout-1 .box-2 { 
+  display: block;
+  grid-column: span 1;
+  grid-row: span 1;
+}
 .carousel-canvas.layout-1 .box-3,
 .carousel-canvas.layout-1 .box-4,
 .carousel-canvas.layout-1 .box-5 { display: none; }
