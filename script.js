@@ -1,4 +1,4 @@
-// TAB SWITCHER
+// TAB SWITCHER (SLIDE 1 HOOK vs PRODUCT SLIDE)
 const tabHook = document.getElementById('tab-hook');
 const tabProduct = document.getElementById('tab-product');
 const sectionHook = document.getElementById('section-hook');
@@ -16,7 +16,7 @@ const adjustmentsProduct = document.getElementById('adjustments-product');
 
 let hookBgUrl = '';
 
-// STORE PER-PHOTO TRANSFORM AND FIT SETTINGS
+// STORE PER-PHOTO TRANSFORM AND FIT SETTINGS FOR PRODUCT SLIDE
 const photoStates = {
   1: { zoom: 1, panX: 0, panY: 0, dim: 0, blur: 0, fit: 'cover' },
   2: { zoom: 1, panX: 0, panY: 0, dim: 0, blur: 0, fit: 'cover' },
@@ -73,7 +73,7 @@ document.getElementById('input-prod-title').addEventListener('input', (e) => doc
 document.getElementById('input-prod-desc').addEventListener('input', (e) => document.getElementById('preview-prod-desc').textContent = e.target.value);
 document.getElementById('input-prod-cta').addEventListener('input', (e) => document.getElementById('preview-prod-cta').textContent = e.target.value);
 
-// DYNAMIC LABEL SELECTORS
+// DYNAMIC LABEL SELECTORS FOR BADGES
 document.getElementById('label-select-1').addEventListener('change', (e) => { document.getElementById('badge-tag-1').textContent = e.target.value; });
 document.getElementById('label-select-2').addEventListener('change', (e) => { document.getElementById('badge-tag-2').textContent = e.target.value; });
 document.getElementById('label-select-3').addEventListener('change', (e) => { document.getElementById('badge-tag-3').textContent = e.target.value; });
@@ -92,9 +92,9 @@ function applyHookImageTransforms() {
   const blur = sliderBlur.value;
   const dim = sliderDim.value;
 
-  previewBg.style.transform = `scale(${scale}) translate(${panX}px, ${panY}px)`;
-  previewBg.style.filter = `blur(${blur}px) opacity(${1 - dim})`;
-  canvasOverlay.style.background = `rgba(0, 0, 0, ${dim})`;
+  previewBg.style.transform = `scale(${scale}) translate(${panX}px,${panY}px) translateZ(0)`;
+  
+  const filterStr = `blur(${blur}px)`; previewBg.style.filter = filterStr; previewBg.style.webkitFilter = filterStr;  canvasOverlay.style.background = `rgba(0, 0, 0, ${dim})`;
 }
 
 [sliderZoom, sliderPanX, sliderPanY, sliderDim, sliderBlur].forEach(slider => {
@@ -164,105 +164,7 @@ function applyActivePhotoTransforms() {
   state.dim = parseFloat(sliderProdDim.value);
   state.blur = parseFloat(sliderProdBlur.value);
 
-  const img = document.getElementById(`prev-img-${boxId}`);
-  const blurBackdrop = document.getElementById(`bg-blur-${boxId}`);
+  const img = document.getElementById(`prev-img-${boxId}`); const blurBackdrop = document.getElementById(`bg-blur-${boxId}`);
 
   img.style.objectFit = state.fit;
-  img.style.transform = `scale(${state.zoom}) translate(${state.panX}px, ${state.panY}px)`;
-  
-  // Directly set inline webkit & standard CSS filters
-  const filterString = `blur(${state.blur}px) brightness(${1 - state.dim})`;
-  img.style.filter = filterString;
-  img.style.webkitFilter = filterString;
-
-  if (state.fit === 'contain') {
-    blurBackdrop.style.display = 'block';
-  } else {
-    blurBackdrop.style.display = 'none';
-  }
-}
-
-[selectFitMode, sliderProdZoom, sliderProdPanX, sliderProdPanY, sliderProdDim, sliderProdBlur].forEach(ctrl => {
-  ctrl.addEventListener('input', applyActivePhotoTransforms);
-  ctrl.addEventListener('change', applyActivePhotoTransforms);
-});
-
-// INTEGRATED LAYOUT STUDIO CONTROLS
-const presetBtns = document.querySelectorAll('.preset-btn');
-const bgSelect = document.getElementById('bg-style-select');
-
-document.getElementById('img-input-1').addEventListener('change', (e) => loadImg(e, 1));
-document.getElementById('img-input-2').addEventListener('change', (e) => loadImg(e, 2));
-document.getElementById('img-input-3').addEventListener('change', (e) => loadImg(e, 3));
-document.getElementById('img-input-4').addEventListener('change', (e) => loadImg(e, 4));
-document.getElementById('img-input-5').addEventListener('change', (e) => loadImg(e, 5));
-
-function loadImg(event, boxId) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => { 
-      const srcUrl = e.target.result;
-      document.getElementById(`prev-img-${boxId}`).src = srcUrl;
-      document.getElementById(`bg-blur-${boxId}`).src = srcUrl;
-      applyActivePhotoTransforms();
-    };
-    reader.readAsDataURL(file);
-  }
-}
-
-presetBtns.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    presetBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    updateCanvasClasses();
-  });
-});
-
-bgSelect.addEventListener('change', () => {
-  updateCanvasClasses();
-});
-
-function updateCanvasClasses() {
-  const activeLayout = document.querySelector('.preset-btn.active').dataset.layout;
-  const isHook = !viewHook.classList.contains('hidden');
-  const modeClass = isHook ? 'mode-hook' : '';
-  carouselCanvas.className = `carousel-canvas ${modeClass} ${activeLayout} ${bgSelect.value}`;
-}
-
-document.getElementById('accent-color').addEventListener('input', (e) => {
-  const color = e.target.value;
-  document.querySelectorAll('.inset-stack-right .box-4, .inset-stack-right .box-5, .layout-3 .box-2').forEach(box => box.style.borderColor = color);
-});
-
-// EXPORT CANVAS AS PNG (WITH FORCED BLUR & RENDER SCALE = 4)
-document.getElementById('download-carousel-btn').addEventListener('click', () => {
-  const canvasElement = document.getElementById('carousel-canvas');
-
-  // Temporarily hide active outline during screenshot
-  const activeBox = document.querySelector('.photo-box.active-box');
-  if (activeBox) activeBox.classList.remove('active-box');
-
-  html2canvas(canvasElement, {
-    scale: 4,               // High resolution 4K output
-    backgroundColor: null,  // Removes white corner artifacting
-    useCORS: true,
-    allowTaint: true,
-    logging: false,
-    onclone: (clonedDoc) => {
-      // Ensure all image filters stay applied during cloning
-      const clonedBoxes = clonedDoc.querySelectorAll('.img-wrapper img, .blur-backdrop');
-      clonedBoxes.forEach(img => {
-        img.style.webkitFilter = img.style.filter;
-      });
-    }
-  }).then((cvs) => {
-    const link = document.createElement('a');
-    const isHook = !viewHook.classList.contains('hidden');
-    link.download = isHook ? 'carousel-slide-1-hook.png' : 'carousel-product-slide.png';
-    link.href = cvs.toDataURL('image/png');
-    link.click();
-
-    if (activeBox) activeBox.classList.add('active-box');
-  });
-});
+  img.style.transform = `scale(${state.zoom}) translate(${state.panX}px, ${state.panY}px)`;  const filterString = `blur(${state.blur
