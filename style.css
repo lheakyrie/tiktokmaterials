@@ -214,7 +214,7 @@ body {
 .canvas-content {
   position: relative;
   z-index: 5;
-  padding: 12px;
+  padding: 10px;
   width: 100%;
 }
 
@@ -250,7 +250,7 @@ body {
   font-size: 0.85rem;
 }
 
-/* PRODUCT SLIDE OVERLAY CARD (HIGHER Z-INDEX TO REMAIN VISIBLE) */
+/* COMPACT PRODUCT SLIDE CARD OVERLAY */
 #view-product {
   display: flex;
   align-items: flex-end;
@@ -296,10 +296,11 @@ body {
 /* LAYOUT CONTAINER */
 .layout-studio-container {
   position: absolute;
-  inset: 0;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 85px;
   z-index: 2;
-  padding: 10px;
-  padding-bottom: 95px; /* Clear space for product glass card at bottom */
 }
 
 .photo-box {
@@ -354,9 +355,7 @@ body {
 }
 .carousel-canvas.layout-1-vertical .box-1,
 .carousel-canvas.layout-1-vertical .box-2 { display: block; grid-column: span 1; grid-row: span 1; }
-.carousel-canvas.layout-1-vertical .box-3,
-.carousel-canvas.layout-1-vertical .box-4,
-.carousel-canvas.layout-1-vertical .box-5 { display: none; }
+.carousel-canvas.layout-1-vertical .box-3 { display: none; }
 
 /* LAYOUT 1B: HORIZONTAL STACK */
 .carousel-canvas.layout-1-horizontal .layout-studio-container {
@@ -367,18 +366,13 @@ body {
 }
 .carousel-canvas.layout-1-horizontal .box-1,
 .carousel-canvas.layout-1-horizontal .box-2 { display: block; grid-column: span 1; grid-row: span 1; }
-.carousel-canvas.layout-1-horizontal .box-3,
-.carousel-canvas.layout-1-horizontal .box-4,
-.carousel-canvas.layout-1-horizontal .box-5 { display: none; }
+.carousel-canvas.layout-1-horizontal .box-3 { display: none; }
 
-/* LAYOUT 1C: FIXED DIAGONAL CUT */
+/* LAYOUT 1C: DIAGONAL CUT */
 .carousel-canvas.layout-1-diagonal .layout-studio-container {
   display: block;
   position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 95px;
+  inset: 0;
 }
 .carousel-canvas.layout-1-diagonal .box-1 {
   position: absolute;
@@ -394,61 +388,76 @@ body {
   z-index: 1;
   display: block;
 }
-.carousel-canvas.layout-1-diagonal .box-3,
-.carousel-canvas.layout-1-diagonal .box-4,
-.carousel-canvas.layout-1-diagonal .box-5 { display: none; }
+.carousel-canvas.layout-1-diagonal .box-3 { display: none; }
 
-/* LAYOUT 2: SKETCH -> MODEL -> PRINT + 2 INSETS (FIXED BOTTOM PRODUCT DETAILS) */
+/* LAYOUT 2: SQUARE TOP BOXES + LARGE FINAL PRINT WITH EMBEDDED INSETS */
+.carousel-canvas.layout-2 .layout-studio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+/* Top row container for square boxes 1 and 2 */
+.carousel-canvas.layout-2 .box-1,
+.carousel-canvas.layout-2 .box-2 {
+  display: block;
+  height: 140px; /* Square proportions */
+}
+
 .carousel-canvas.layout-2 .layout-studio-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.7fr 1.5fr;
+  grid-template-rows: 140px 1fr;
   gap: 6px;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 95px;
 }
-.carousel-canvas.layout-2 .box-1 { grid-column: span 1; grid-row: span 1; display: block; }
-.carousel-canvas.layout-2 .box-2 { grid-column: span 1; grid-row: span 1; display: block; }
-.carousel-canvas.layout-2 .box-3 { grid-column: span 2; grid-row: span 1; display: block; }
-.carousel-canvas.layout-2 .box-4 {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  width: 50px;
-  height: 50px;
-  border: 2px solid #ff5e00;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-  z-index: 4;
+
+.carousel-canvas.layout-2 .box-1 { grid-column: span 1; grid-row: span 1; }
+.carousel-canvas.layout-2 .box-2 { grid-column: span 1; grid-row: span 1; }
+.carousel-canvas.layout-2 .box-3 {
+  grid-column: span 2;
+  grid-row: span 1;
   display: block;
+  position: relative;
 }
-.carousel-canvas.layout-2 .box-5 {
+
+/* Inset boxes nested inside box-3 */
+.carousel-canvas.layout-2 .box-3 .box-4 {
   position: absolute;
-  bottom: 10px;
-  right: 66px;
-  width: 50px;
-  height: 50px;
+  bottom: 8px;
+  right: 8px;
+  width: 52px;
+  height: 52px;
   border: 2px solid #ff5e00;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
   z-index: 4;
   display: block;
 }
 
-/* LAYOUT 3: REFERENCE VS FINAL PRINT */
+.carousel-canvas.layout-2 .box-3 .box-5 {
+  position: absolute;
+  bottom: 8px;
+  right: 66px;
+  width: 52px;
+  height: 52px;
+  border: 2px solid #ff5e00;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+  z-index: 4;
+  display: block;
+}
+
+/* LAYOUT 3: MAXIMIZED FULL-FRAME HEIGHT */
 .carousel-canvas.layout-3 .layout-studio-container {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 95px;
+  height: 100%;
 }
-.carousel-canvas.layout-3 .box-1 { flex: 0.75; display: block; }
-.carousel-canvas.layout-3 .box-2 { flex: 1.6; border: 2px solid #ff5e00; display: block; }
-.carousel-canvas.layout-3 .box-3,
-.carousel-canvas.layout-3 .box-4,
-.carousel-canvas.layout-3 .box-5 { display: none; }
+.carousel-canvas.layout-3 .box-1 {
+  flex: 1;
+  display: block;
+}
+.carousel-canvas.layout-3 .box-2 {
+  flex: 2;
+  border: 2px solid #ff5e00;
+  display: block;
+}
+.carousel-canvas.layout-3 .box-3 { display: none; }
