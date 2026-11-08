@@ -214,7 +214,7 @@ body {
 .canvas-content {
   position: relative;
   z-index: 5;
-  padding: 14px;
+  padding: 12px;
   width: 100%;
 }
 
@@ -250,23 +250,25 @@ body {
   font-size: 0.85rem;
 }
 
-/* COMPACT PRODUCT SLIDE CARD OVERLAY */
+/* PRODUCT SLIDE OVERLAY CARD (HIGHER Z-INDEX TO REMAIN VISIBLE) */
 #view-product {
   display: flex;
   align-items: flex-end;
   height: 100%;
+  pointer-events: none;
 }
 
 .card-glass {
-  background: rgba(15, 17, 23, 0.92);
+  background: rgba(15, 17, 23, 0.94);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 10px 12px;
   border-radius: 8px;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 3px;
+  pointer-events: auto;
 }
 
 .card-glass h2 {
@@ -297,7 +299,7 @@ body {
   inset: 0;
   z-index: 2;
   padding: 10px;
-  padding-bottom: 82px; /* Decreased bottom clearance for maximum photo height */
+  padding-bottom: 95px; /* Clear space for product glass card at bottom */
 }
 
 .photo-box {
@@ -340,7 +342,7 @@ body {
 .carousel-canvas.bg-spotlight { background: radial-gradient(circle at 50% 35%, #2a2f42 0%, #0f1117 80%); }
 
 /* ----------------------------------
-   HIGHLIGHT LAYOUT VARIANTS
+   HIGHLIGHT LAYOUT TEMPLATES
 ----------------------------------- */
 
 /* LAYOUT 1A: VERTICAL 50/50 SPLIT */
@@ -369,10 +371,14 @@ body {
 .carousel-canvas.layout-1-horizontal .box-4,
 .carousel-canvas.layout-1-horizontal .box-5 { display: none; }
 
-/* LAYOUT 1C: DIAGONAL CUT */
+/* LAYOUT 1C: FIXED DIAGONAL CUT */
 .carousel-canvas.layout-1-diagonal .layout-studio-container {
   display: block;
-  position: relative;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 95px;
 }
 .carousel-canvas.layout-1-diagonal .box-1 {
   position: absolute;
@@ -392,23 +398,27 @@ body {
 .carousel-canvas.layout-1-diagonal .box-4,
 .carousel-canvas.layout-1-diagonal .box-5 { display: none; }
 
-/* LAYOUT 2: SKETCH -> MODEL -> LARGER PRINT + 2 INSETS */
+/* LAYOUT 2: SKETCH -> MODEL -> PRINT + 2 INSETS (FIXED BOTTOM PRODUCT DETAILS) */
 .carousel-canvas.layout-2 .layout-studio-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.7fr 1.6fr; /* Reduced top row height to maximize bottom print image */
+  grid-template-rows: 0.7fr 1.5fr;
   gap: 6px;
-  position: relative;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 95px;
 }
 .carousel-canvas.layout-2 .box-1 { grid-column: span 1; grid-row: span 1; display: block; }
 .carousel-canvas.layout-2 .box-2 { grid-column: span 1; grid-row: span 1; display: block; }
 .carousel-canvas.layout-2 .box-3 { grid-column: span 2; grid-row: span 1; display: block; }
 .carousel-canvas.layout-2 .box-4 {
   position: absolute;
-  bottom: 90px;
+  bottom: 10px;
   right: 10px;
-  width: 55px;
-  height: 55px;
+  width: 50px;
+  height: 50px;
   border: 2px solid #ff5e00;
   box-shadow: 0 4px 12px rgba(0,0,0,0.6);
   z-index: 4;
@@ -416,10 +426,10 @@ body {
 }
 .carousel-canvas.layout-2 .box-5 {
   position: absolute;
-  bottom: 90px;
-  right: 72px;
-  width: 55px;
-  height: 55px;
+  bottom: 10px;
+  right: 66px;
+  width: 50px;
+  height: 50px;
   border: 2px solid #ff5e00;
   box-shadow: 0 4px 12px rgba(0,0,0,0.6);
   z-index: 4;
@@ -431,6 +441,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 95px;
 }
 .carousel-canvas.layout-3 .box-1 { flex: 0.75; display: block; }
 .carousel-canvas.layout-3 .box-2 { flex: 1.6; border: 2px solid #ff5e00; display: block; }
