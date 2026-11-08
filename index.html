@@ -3,44 +3,75 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TikTok Post Generator - PinoyProto 3D</title>
+  <title>TikTok 4:3 Carousel Generator - PinoyProto 3D</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- html2canvas library for exporting preview as image -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
   <div class="app-container">
     <!-- CONTROL PANEL -->
     <div class="control-panel">
-      <h2>TikTok Post Creator</h2>
+      <h2>Carousel Builder (4:3)</h2>
       
-      <label>Headline / Tagline</label>
-      <input type="text" id="input-headline" value="Custom 3D Print Showcase!" placeholder="Enter main title..." />
+      <!-- Slide Selection Tabs -->
+      <div class="tab-group">
+        <button id="tab-hook" class="tab-btn active">Slide 1 (Hook)</button>
+        <button id="tab-product" class="tab-btn">Product Slide</button>
+      </div>
 
-      <label>Subheading / Details</label>
-      <textarea id="input-subtext" rows="3" placeholder="Enter description or specs...">High precision PLA print | 0.12mm layer height</textarea>
+      <!-- SLIDE 1 INPUTS -->
+      <div id="section-hook" class="input-section">
+        <label>Main Question / Hook</label>
+        <textarea id="input-hook-title" rows="2">Need a 3D design for your project?</textarea>
 
-      <label>Call to Action (CTA)</label>
-      <input type="text" id="input-cta" value="Order yours at PinoyProto 3D!" />
+        <label>Subtext / Lead-in</label>
+        <input type="text" id="input-hook-sub" value="Swipe to see our recent 3D prints & custom models ➡️" />
 
-      <label>Upload Product Image</label>
-      <input type="file" id="input-image" accept="image/*" />
+        <label>Background Image (Optional)</label>
+        <input type="file" id="input-hook-bg" accept="image/*" />
+      </div>
 
-      <button id="download-btn">Download Post Image</button>
+      <!-- PRODUCT SLIDE INPUTS -->
+      <div id="section-product" class="input-section hidden">
+        <label>Product / Project Name</label>
+        <input type="text" id="input-prod-title" value="Custom Mechanical Bracket" />
+
+        <label>Description / Specs</label>
+        <textarea id="input-prod-desc" rows="3">PETG Material | High Stress Resistance | 0.2mm Layer Height</textarea>
+
+        <label>Call to Action / Badge</label>
+        <input type="text" id="input-prod-cta" value="Available at PinoyProto 3D" />
+
+        <label>Upload Product Photo</label>
+        <input type="file" id="input-prod-img" accept="image/*" />
+      </div>
+
+      <button id="download-btn">Download This Slide (4:3 PNG)</button>
     </div>
 
-    <!-- TIKTOK PREVIEW (9:16 Aspect Ratio) -->
+    <!-- PREVIEW AREA -->
     <div class="preview-wrapper">
-      <div id="tiktok-canvas" class="tiktok-canvas">
+      <!-- 4:3 Aspect Ratio Canvas -->
+      <div id="carousel-canvas" class="carousel-canvas mode-hook">
         <div class="overlay"></div>
-        <img id="preview-img" src="https://via.placeholder.com/1080x1920/1e1e24/fff?text=Upload+3D+Model+Image" alt="3D Model Preview" />
-        
-        <div class="card-content">
-          <span class="badge">PINOYPROTO 3D</span>
-          <h1 id="preview-headline">Custom 3D Print Showcase!</h1>
-          <p id="preview-subtext">High precision PLA print | 0.12mm layer height</p>
-          <div class="cta-box" id="preview-cta">Order yours at PinoyProto 3D!</div>
+        <img id="preview-bg" src="" alt="Background/Product Image" class="bg-img hidden" />
+
+        <!-- HOOK CONTENT (Slide 1) -->
+        <div id="view-hook" class="canvas-content">
+          <span class="brand-badge">PINOYPROTO 3D</span>
+          <h1 id="preview-hook-title">Need a 3D design for your project?</h1>
+          <p id="preview-hook-sub">Swipe to see our recent 3D prints & custom models ➡️</p>
         </div>
+
+        <!-- PRODUCT CONTENT (Slide 2+) -->
+        <div id="view-product" class="canvas-content hidden">
+          <div class="card-glass">
+            <h2 id="preview-prod-title">Custom Mechanical Bracket</h2>
+            <p id="preview-prod-desc">PETG Material | High Stress Resistance | 0.2mm Layer Height</p>
+            <div class="prod-badge" id="preview-prod-cta">Available at PinoyProto 3D</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
