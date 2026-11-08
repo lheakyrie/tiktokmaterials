@@ -163,17 +163,6 @@ body {
   width: 100%;
 }
 
-.control-row-slider {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.control-row-slider input[type="range"] {
-  accent-color: #ff5e00;
-  cursor: pointer;
-}
-
 .image-controls-section {
   background: #0f1117;
   padding: 14px;
@@ -207,13 +196,15 @@ body {
   background: #e05300;
 }
 
-/* STICKY PREVIEW CANVAS CONTAINER */
+/* STICKY PREVIEW CANVAS CONTAINER + BELOW ADJUSTMENTS */
 .preview-wrapper {
   flex: 1;
   min-width: 340px;
+  max-width: 360px;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
   position: sticky;
   top: 20px;
 }
@@ -262,6 +253,40 @@ body {
   position: relative;
   z-index: 5;
   padding: 10px;
+  width: 100%;
+}
+
+/* PREVIEW ADJUSTMENTS PANEL DIRECTLY BELOW CANVAS */
+.preview-adjustments-panel {
+  width: 100%;
+}
+
+.slider-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+}
+
+.full-width-slider {
+  grid-column: span 2;
+}
+
+.control-row-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.control-row-slider label {
+  font-size: 0.7rem;
+  color: #a0a5b5;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.control-row-slider input[type="range"] {
+  accent-color: #ff5e00;
+  cursor: pointer;
   width: 100%;
 }
 

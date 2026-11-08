@@ -43,36 +43,6 @@
 
             <label>Background Image</label>
             <input type="file" id="input-hook-bg" accept="image/*" />
-
-            <!-- SLIDE 1 IMAGE ADJUSTMENTS -->
-            <div class="image-controls-section">
-              <div class="section-title">Slide 1 Background Controls</div>
-
-              <div class="control-row-slider">
-                <label for="slider-zoom">Zoom (Scale)</label>
-                <input type="range" id="slider-zoom" min="1" max="2" step="0.05" value="1" />
-              </div>
-
-              <div class="control-row-slider">
-                <label for="slider-pan-x">Pan Horizontal (X)</label>
-                <input type="range" id="slider-pan-x" min="-50" max="50" step="1" value="0" />
-              </div>
-
-              <div class="control-row-slider">
-                <label for="slider-pan-y">Pan Vertical (Y)</label>
-                <input type="range" id="slider-pan-y" min="-50" max="50" step="1" value="0" />
-              </div>
-
-              <div class="control-row-slider">
-                <label for="slider-dim">Dim (Darkness)</label>
-                <input type="range" id="slider-dim" min="0" max="0.9" step="0.05" value="0.4" />
-              </div>
-
-              <div class="control-row-slider">
-                <label for="slider-blur">Blur (px)</label>
-                <input type="range" id="slider-blur" min="0" max="20" step="1" value="0" />
-              </div>
-            </div>
           </div>
 
           <!-- PRODUCT SLIDE INPUTS -->
@@ -85,36 +55,6 @@
 
             <label>Call to Action / Badge</label>
             <input type="text" id="input-prod-cta" value="AVAILABLE AT PINOYPROTO 3D" />
-
-            <!-- PRODUCT SLIDE IMAGE ADJUSTMENTS -->
-            <div class="image-controls-section">
-              <div class="section-title">Product Image Layout Adjustments</div>
-
-              <div class="control-row-slider">
-                <label for="slider-prod-zoom">Zoom (Scale)</label>
-                <input type="range" id="slider-prod-zoom" min="1" max="2" step="0.05" value="1" />
-              </div>
-
-              <div class="control-row-slider">
-                <label for="slider-prod-pan-x">Pan Horizontal (X)</label>
-                <input type="range" id="slider-prod-pan-x" min="-50" max="50" step="1" value="0" />
-              </div>
-
-              <div class="control-row-slider">
-                <label for="slider-prod-pan-y">Pan Vertical (Y)</label>
-                <input type="range" id="slider-prod-pan-y" min="-50" max="50" step="1" value="0" />
-              </div>
-
-              <div class="control-row-slider">
-                <label for="slider-prod-dim">Dim (Darkness)</label>
-                <input type="range" id="slider-prod-dim" min="0" max="0.9" step="0.05" value="0" />
-              </div>
-
-              <div class="control-row-slider">
-                <label for="slider-prod-blur">Blur (px)</label>
-                <input type="range" id="slider-prod-blur" min="0" max="20" step="1" value="0" />
-              </div>
-            </div>
 
             <!-- INTEGRATED IMAGE DESIGNER CONTROLS -->
             <div class="image-controls-section">
@@ -163,89 +103,4 @@
                 <button class="preset-btn" data-layout="layout-3">Layout 3: Reference vs Final Print</button>
               </div>
 
-              <label>Background Pattern</label>
-              <select id="bg-style-select">
-                <option value="bg-dark-clean">Minimal Dark Studio</option>
-                <option value="bg-cad-grid">CAD Blueprint Grid</option>
-                <option value="bg-geo-diagonal">Diagonal Slash & Accent</option>
-                <option value="bg-spotlight">Center Spotlight Radial</option>
-              </select>
-
-              <div class="control-row">
-                <label>Accent Line / Border Color</label>
-                <input type="color" id="accent-color" value="#ffffff" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <button id="download-carousel-btn" class="action-btn">Export Slide (3:4 PNG)</button>
-      </div>
-
-      <!-- PREVIEW CANVAS AREA -->
-      <div class="preview-wrapper">
-        <div id="carousel-canvas" class="carousel-canvas mode-hook layout-1-vertical bg-dark-clean">
-          <div id="canvas-overlay" class="overlay"></div>
-          
-          <!-- Hook Background Image Container -->
-          <div class="bg-img-container">
-            <img id="preview-bg" src="" alt="Background Image" class="bg-img hidden" />
-          </div>
-
-          <!-- INTEGRATED LAYOUT STUDIO CONTAINERS -->
-          <div id="layout-studio-container" class="layout-studio-container hidden">
-            <!-- Top Box 1 -->
-            <div class="photo-box box-1">
-              <span id="badge-tag-1" class="photo-tag tag-top-left">BEFORE: CLIENT SKETCH</span>
-              <img id="prev-img-1" src="https://via.placeholder.com/600x800/1b1e29/fff?text=Client+Sketch" alt="Photo 1" />
-            </div>
-
-            <!-- Top Box 2 -->
-            <div class="photo-box box-2">
-              <span id="badge-tag-2" class="photo-tag tag-top-left">AFTER: 3D MODEL</span>
-              <img id="prev-img-2" src="https://via.placeholder.com/600x800/222634/fff?text=3D+Model+Render" alt="Photo 2" />
-            </div>
-
-            <!-- Bottom Main Showcase Box 3 -->
-            <div class="photo-box box-3">
-              <span id="badge-tag-3" class="photo-tag tag-top-left">AFTER: OUR 3D PRINTS</span>
-              <img id="prev-img-3" src="https://via.placeholder.com/600x800/292d3e/fff?text=Finished+3D+Print" alt="Photo 3" />
-              
-              <!-- Embedded Stacked Right Insets for Layout 2 -->
-              <div class="inset-stack-right">
-                <div class="photo-box box-4">
-                  <img id="prev-img-4" src="https://via.placeholder.com/600x800/1e2230/fff?text=Detail+1" alt="Inset 1" />
-                </div>
-                <div class="photo-box box-5">
-                  <img id="prev-img-5" src="https://via.placeholder.com/600x800/181a24/fff?text=Detail+2" alt="Inset 2" />
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- SLIDE 1 (HOOK) CONTENT -->
-          <div id="view-hook" class="canvas-content">
-            <span class="brand-badge">PINOYPROTO 3D</span>
-            <h1 id="preview-hook-title">NEED A 3D DESIGN FOR YOUR PROJECT?</h1>
-            <p id="preview-hook-sub">Swipe to see our recent 3D prints & custom models ➡️</p>
-          </div>
-
-          <!-- PRODUCT SLIDE OVERLAY CARD -->
-          <div id="view-product" class="canvas-content hidden">
-            <div class="card-glass">
-              <h2 id="preview-prod-title">CUSTOM MECHANICAL BRACKET</h2>
-              <p id="preview-prod-desc">PETG Material | High Stress Resistance | 0.2mm Layer Height</p>
-              <div class="prod-badge" id="preview-prod-cta">AVAILABLE AT PINOYPROTO 3D</div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <script src="script.js"></script>
-</body>
-</html>
+              <label

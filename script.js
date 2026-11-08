@@ -11,6 +11,9 @@ const previewBg = document.getElementById('preview-bg');
 const canvasOverlay = document.getElementById('canvas-overlay');
 const layoutStudioContainer = document.getElementById('layout-studio-container');
 
+const adjustmentsHook = document.getElementById('adjustments-hook');
+const adjustmentsProduct = document.getElementById('adjustments-product');
+
 let hookBgUrl = '';
 
 tabHook.addEventListener('click', () => {
@@ -22,6 +25,9 @@ tabHook.addEventListener('click', () => {
   viewProduct.classList.add('hidden');
   layoutStudioContainer.classList.add('hidden');
   carouselCanvas.classList.add('mode-hook');
+
+  adjustmentsHook.classList.remove('hidden');
+  adjustmentsProduct.classList.add('hidden');
   
   if (hookBgUrl) {
     previewBg.src = hookBgUrl;
@@ -41,6 +47,10 @@ tabProduct.addEventListener('click', () => {
   layoutStudioContainer.classList.remove('hidden');
   previewBg.classList.add('hidden');
   carouselCanvas.classList.remove('mode-hook');
+
+  adjustmentsProduct.classList.remove('hidden');
+  adjustmentsHook.classList.add('hidden');
+  
   updateCanvasClasses();
 });
 
