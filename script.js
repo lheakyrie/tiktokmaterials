@@ -237,13 +237,28 @@ document.getElementById('accent-color').addEventListener('input', (e) => {
   document.querySelectorAll('.inset-stack-right .box-4, .inset-stack-right .box-5, .layout-3 .box-2').forEach(box => box.style.borderColor = color);
 });
 
-// EXPORT CANVAS AS PNG
+// EXPORT CANVAS AS PNG (FIXED WHITE CORNERS & ACCURATE CAPTURE)
 document.getElementById('download-carousel-btn').addEventListener('click', () => {
-  html2canvas(carouselCanvas, { scale: 2 }).then((cvs) => {
+  const canvasElement = document.getElementById('carousel-canvas');
+
+  // Temporarily remove active selection outline so it doesn't export in the PNG
+  const activeBox = document.querySelector('.photo-box.active-box');
+  if (activeBox) activeBox.classList.remove('active-box');
+
+  html2canvas(canvasElement, {
+    scale: 3, // High-resolution export
+    backgroundColor: null, // Removes white background artifacting on rounded corners
+    useCORS: true,
+    allowTaint: true,
+    logging: false
+  }).then((cvs) => {
     const link = document.createElement('a');
     const isHook = !viewHook.classList.contains('hidden');
     link.download = isHook ? 'carousel-slide-1-hook.png' : 'carousel-product-slide.png';
     link.href = cvs.toDataURL('image/png');
     link.click();
+
+    // Re-restore active box highlight
+    if (activeBox) activeBox.classList.add('active-box');
   });
 });
