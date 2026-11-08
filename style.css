@@ -76,8 +76,8 @@ body {
 }
 
 .layout-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
 }
 
@@ -86,11 +86,12 @@ body {
   background: #0f1117;
   border: 1px solid #2e3447;
   color: #8a90a2;
-  padding: 8px;
+  padding: 9px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.8rem;
   font-weight: 600;
+  text-align: left;
 }
 
 .tab-btn.active, .preset-btn.active {
@@ -210,7 +211,7 @@ body {
   width: 100%;
 }
 
-/* SLIDE 1 HOOK STYLES */
+/* HOOK SLIDE STYLES */
 #view-hook {
   text-align: center;
   display: flex;
@@ -278,15 +279,13 @@ body {
   color: #ff5e00;
 }
 
-/* INTEGRATED LAYOUT STUDIO CANVAS RULES */
+/* LAYOUT CONTAINER */
 .layout-studio-container {
   position: absolute;
   inset: 0;
-  display: grid;
-  padding: 12px;
-  gap: 10px;
   z-index: 2;
-  padding-bottom: 120px; /* Reserves bottom space for product glass card */
+  padding: 12px;
+  padding-bottom: 120px; /* Space for glass product card */
 }
 
 .photo-box {
@@ -304,7 +303,21 @@ body {
   display: block;
 }
 
-/* Background Patterns */
+.photo-tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-family: 'Anton', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.8px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  z-index: 3;
+}
+
+/* BACKGROUND PATTERN STYLES */
 .carousel-canvas.bg-dark-clean { background-color: #0f1117; }
 .carousel-canvas.bg-cad-grid {
   background-color: #0d1017;
@@ -314,25 +327,66 @@ body {
 .carousel-canvas.bg-geo-diagonal { background: linear-gradient(135deg, #1b1e29 0%, #0a0c10 100%); }
 .carousel-canvas.bg-spotlight { background: radial-gradient(circle at 50% 35%, #2a2f42 0%, #0f1117 80%); }
 
-/* Layout Grid Templates */
-.carousel-canvas.hero-split .layout-studio-container { grid-template-columns: 1fr 1fr; grid-template-rows: 1.4fr 1fr; }
-.carousel-canvas.hero-split .box-1 { grid-column: span 2; }
+/* ----------------------------------
+   CUSTOM HIGHLIGHT LAYOUT TEMPLATES 
+----------------------------------- */
 
-.carousel-canvas.vertical-stack .layout-studio-container { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr 1fr; }
+/* LAYOUT 1: BEFORE (SKETCH) & AFTER (3D MODEL) SPLIT */
+.carousel-canvas.layout-1 .layout-studio-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.carousel-canvas.layout-1 .box-3,
+.carousel-canvas.layout-1 .box-4,
+.carousel-canvas.layout-1 .box-5 { display: none; }
 
-.carousel-canvas.diagonal-geo .layout-studio-container { display: block; padding: 15px; padding-bottom: 120px; }
-.carousel-canvas.diagonal-geo .box-1 { width: 70%; height: 60%; clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%); }
-.carousel-canvas.diagonal-geo .box-2 { position: absolute; top: 15px; right: 15px; width: 45%; height: 55%; clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%); border: 2px solid #ff5e00; }
-.carousel-canvas.diagonal-geo .box-3 { display: none; }
+/* LAYOUT 2: 1ST PHOTO (SKETCH), 2ND (MODEL), 3RD (PRINT + 2 ANGLE INSETS) */
+.carousel-canvas.layout-2 .layout-studio-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1.2fr 1.8fr;
+  gap: 8px;
+}
+.carousel-canvas.layout-2 .box-1 { grid-column: span 1; grid-row: span 1; }
+.carousel-canvas.layout-2 .box-2 { grid-column: span 1; grid-row: span 1; }
+.carousel-canvas.layout-2 .box-3 {
+  grid-column: span 2;
+  grid-row: span 1;
+  position: relative;
+}
+.carousel-canvas.layout-2 .box-4 {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 70px;
+  height: 70px;
+  border: 2px solid #ff5e00;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+.carousel-canvas.layout-2 .box-5 {
+  position: absolute;
+  top: 10px;
+  right: 90px;
+  width: 70px;
+  height: 70px;
+  border: 2px solid #ff5e00;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
 
-.carousel-canvas.offset-overlap .layout-studio-container { display: block; padding: 20px; padding-bottom: 120px; }
-.carousel-canvas.offset-overlap .box-1 { width: 75%; height: 65%; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
-.carousel-canvas.offset-overlap .box-2 { position: absolute; bottom: 125px; right: 20px; width: 55%; height: 45%; border: 3px solid #ff5e00; box-shadow: 0 10px 25px rgba(0,0,0,0.6); }
-.carousel-canvas.offset-overlap .box-3 { display: none; }
-
-.carousel-canvas.minimal-frame .layout-studio-container { display: block; padding: 25px; padding-bottom: 125px; }
-.carousel-canvas.minimal-frame .box-1 { width: 100%; height: 100%; border: 2px solid rgba(255, 94, 0, 0.4); padding: 6px; background: #0f1117; }
-.carousel-canvas.minimal-frame .box-2, .carousel-canvas.minimal-frame .box-3 { display: none; }
-
-.carousel-canvas.grid-4 .layout-studio-container { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
-.carousel-canvas.grid-4 .box-4 { display: block; }
+/* LAYOUT 3: REFERENCE PHOTO VS LARGER 3D PRINT */
+.carousel-canvas.layout-3 .layout-studio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.carousel-canvas.layout-3 .box-1 {
+  flex: 0.8; /* Smaller Reference Photo */
+}
+.carousel-canvas.layout-3 .box-2 {
+  flex: 1.6; /* Larger Final 3D Print Photo */
+  border: 2px solid #ff5e00;
+}
+.carousel-canvas.layout-3 .box-3,
+.carousel-canvas.layout-3 .box-4,
+.carousel-canvas.layout-3 .box-5 { display: none; }
