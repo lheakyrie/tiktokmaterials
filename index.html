@@ -101,4 +101,88 @@
                 <button class="preset-btn active" data-layout="layout-1-vertical">Layout 1A: Before & After Split (Vertical)</button>
                 <button class="preset-btn" data-layout="layout-1-horizontal">Layout 1B: Before & After Stack (Horizontal)</button>
                 <button class="preset-btn" data-layout="layout-2">Layout 2: 70/30 Multi-Panel Showcase</button>
-                <button class="preset-btn"
+                <button class="preset-btn" data-layout="layout-3">Layout 3: Reference vs Final Print</button>
+              </div>
+
+              <label>Background Pattern</label>
+              <select id="bg-style-select">
+                <option value="bg-dark-clean">Minimal Dark Studio</option>
+                <option value="bg-cad-grid">CAD Blueprint Grid</option>
+                <option value="bg-geo-diagonal">Diagonal Slash & Accent</option>
+                <option value="bg-spotlight">Center Spotlight Radial</option>
+              </select>
+
+              <div class="control-row">
+                <label>Accent Line / Border Color</label>
+                <input type="color" id="accent-color" value="#ff5e00" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button id="download-carousel-btn" class="action-btn">Export Slide (3:4 PNG)</button>
+      </div>
+
+      <!-- PREVIEW CANVAS AREA -->
+      <div class="preview-wrapper">
+        <div id="carousel-canvas" class="carousel-canvas mode-hook layout-1-vertical bg-dark-clean">
+          <div id="canvas-overlay" class="overlay"></div>
+          
+          <!-- Hook Background -->
+          <img id="preview-bg" src="" alt="Background Image" class="bg-img hidden" />
+
+          <!-- INTEGRATED LAYOUT STUDIO CONTAINERS (Product Mode) -->
+          <div id="layout-studio-container" class="layout-studio-container hidden">
+            <!-- Photo Frames -->
+            <div class="photo-box box-1">
+              <span id="badge-tag-1" class="photo-tag tag-top-left">REFERENCE</span>
+              <img id="prev-img-1" src="https://via.placeholder.com/600x800/1b1e29/fff?text=Reference+/+Sketch" alt="Photo 1" />
+            </div>
+
+            <div class="photo-box box-2">
+              <span id="badge-tag-2" class="photo-tag tag-top-left">OUR 3D MODEL</span>
+              <img id="prev-img-2" src="https://via.placeholder.com/600x800/222634/fff?text=3D+Model+Render" alt="Photo 2" />
+            </div>
+
+            <!-- LAYOUT 2 LOWER SECTION: 70% MAIN SHOWCASE + 30% RIGHT THUMBNAIL COLUMN -->
+            <div class="photo-box box-3">
+              <span id="badge-tag-3" class="photo-tag tag-top-left">FINAL 3D PRINT</span>
+              <img id="prev-img-3" src="https://via.placeholder.com/600x800/292d3e/fff?text=Finished+3D+Print" alt="Photo 3" />
+            </div>
+
+            <div class="right-thumb-column">
+              <div class="photo-box box-4">
+                <img id="prev-img-4" src="https://via.placeholder.com/600x800/1e2230/fff?text=Angle+1" alt="Angle 1" />
+              </div>
+              <div class="photo-box box-5">
+                <img id="prev-img-5" src="https://via.placeholder.com/600x800/181a24/fff?text=Angle+2" alt="Angle 2" />
+              </div>
+            </div>
+
+          </div>
+
+          <!-- SLIDE 1 (HOOK) CONTENT -->
+          <div id="view-hook" class="canvas-content">
+            <span class="brand-badge">PINOYPROTO 3D</span>
+            <h1 id="preview-hook-title">NEED A 3D DESIGN FOR YOUR PROJECT?</h1>
+            <p id="preview-hook-sub">Swipe to see our recent 3D prints & custom models ➡️</p>
+          </div>
+
+          <!-- PRODUCT SLIDE OVERLAY CARD -->
+          <div id="view-product" class="canvas-content hidden">
+            <div class="card-glass">
+              <h2 id="preview-prod-title">CUSTOM MECHANICAL BRACKET</h2>
+              <p id="preview-prod-desc">PETG Material | High Stress Resistance | 0.2mm Layer Height</p>
+              <div class="prod-badge" id="preview-prod-cta">AVAILABLE AT PINOYPROTO 3D</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
