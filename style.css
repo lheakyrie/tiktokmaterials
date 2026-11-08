@@ -241,6 +241,8 @@ body {
   object-fit: cover;
   transform-origin: center center;
   transition: transform 0.05s ease-out, filter 0.05s ease-out;
+  transform: translateZ(0); /* Hardware acceleration fix for html2canvas blur capture */
+  will-change: filter, transform;
 }
 
 .overlay {
