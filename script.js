@@ -92,12 +92,12 @@ document.getElementById('input-prod-img').addEventListener('change', (e) => {
   }
 });
 
-// Download Canvas as high-res PNG (1200x900px, 3:4 scale)
+// Download Canvas as high-res 3:4 PNG (780x1040px output)
 document.getElementById('download-btn').addEventListener('click', () => {
   html2canvas(canvas, { scale: 2 }).then((cvs) => {
     const link = document.createElement('a');
     const isHook = !viewHook.classList.contains('hidden');
-    link.download = isHook ? 'carousel-slide-1-hook.png' : 'carousel-product-slide.png';
+    link.download = isHook ? 'carousel-slide-1-portrait.png' : 'carousel-product-portrait.png';
     link.href = cvs.toDataURL('image/png');
     link.click();
   });
