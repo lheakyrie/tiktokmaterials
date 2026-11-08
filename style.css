@@ -426,4 +426,43 @@ body {
   display: none;
 }
 
-.carousel-canvas.layout-2 .inset-stack
+.carousel-canvas.layout-2 .inset-stack-right {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+  width: 72px;
+  gap: 8px;
+  z-index: 6;
+}
+
+.carousel-canvas.layout-2 .inset-stack-right .box-4,
+.carousel-canvas.layout-2 .inset-stack-right .box-5 {
+  flex: 1;
+  display: block;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+/* LAYOUT 3: FULL FRAME FIT ABOVE PRODUCT CARD */
+.carousel-canvas.layout-3 .layout-studio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  top: 10px;
+  bottom: 80px;
+}
+.carousel-canvas.layout-3 .box-1 {
+  flex: 0.8;
+  display: block;
+}
+.carousel-canvas.layout-3 .box-2 {
+  flex: 1.5;
+  border: 2px solid #ff5e00;
+  display: block;
+}
+.carousel-canvas.layout-3 .box-3 { display: none; }
