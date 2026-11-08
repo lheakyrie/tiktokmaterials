@@ -181,7 +181,7 @@ body {
 .carousel-canvas {
   position: relative;
   width: 360px;
-  height: 480px; /* Maintains 3:4 Aspect Ratio */
+  height: 480px; /* 3:4 Aspect Ratio */
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 12px 32px rgba(0,0,0,0.6);
@@ -214,7 +214,7 @@ body {
 .canvas-content {
   position: relative;
   z-index: 5;
-  padding: 25px;
+  padding: 14px;
   width: 100%;
 }
 
@@ -225,6 +225,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  padding: 25px;
 }
 
 .brand-badge {
@@ -249,7 +250,7 @@ body {
   font-size: 0.85rem;
 }
 
-/* PRODUCT SLIDE CARD OVERLAY */
+/* COMPACT PRODUCT SLIDE CARD OVERLAY */
 #view-product {
   display: flex;
   align-items: flex-end;
@@ -257,33 +258,37 @@ body {
 }
 
 .card-glass {
-  background: rgba(15, 17, 23, 0.88);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 14px;
-  border-radius: 10px;
+  background: rgba(15, 17, 23, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 10px 12px;
+  border-radius: 8px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 3px;
 }
 
 .card-glass h2 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   line-height: 1;
+  letter-spacing: 0.5px;
 }
 
 .card-glass p {
-  font-weight: 300;
-  font-size: 0.8rem;
+  font-weight: 400;
+  font-size: 0.72rem;
   color: #d1d5db;
+  line-height: 1.2;
 }
 
 .prod-badge {
   font-family: 'Anton', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   color: #ff5e00;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
 }
 
 /* LAYOUT CONTAINER */
@@ -291,14 +296,14 @@ body {
   position: absolute;
   inset: 0;
   z-index: 2;
-  padding: 12px;
-  padding-bottom: 110px;
+  padding: 10px;
+  padding-bottom: 82px; /* Decreased bottom clearance for maximum photo height */
 }
 
 .photo-box {
   position: relative;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 6px;
   width: 100%;
   height: 100%;
 }
@@ -312,15 +317,15 @@ body {
 
 .photo-tag {
   position: absolute;
-  top: 8px;
-  left: 8px;
-  background: rgba(0, 0, 0, 0.7);
+  top: 6px;
+  left: 6px;
+  background: rgba(0, 0, 0, 0.75);
   color: #fff;
   font-family: 'Anton', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   letter-spacing: 0.8px;
-  padding: 3px 6px;
-  border-radius: 4px;
+  padding: 2px 6px;
+  border-radius: 3px;
   z-index: 3;
 }
 
@@ -334,28 +339,65 @@ body {
 .carousel-canvas.bg-geo-diagonal { background: linear-gradient(135deg, #1b1e29 0%, #0a0c10 100%); }
 .carousel-canvas.bg-spotlight { background: radial-gradient(circle at 50% 35%, #2a2f42 0%, #0f1117 80%); }
 
-/* TEMPLATES */
-.carousel-canvas.layout-1 .layout-studio-container {
+/* ----------------------------------
+   HIGHLIGHT LAYOUT VARIANTS
+----------------------------------- */
+
+/* LAYOUT 1A: VERTICAL 50/50 SPLIT */
+.carousel-canvas.layout-1-vertical .layout-studio-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
-  gap: 8px;
+  gap: 6px;
 }
-.carousel-canvas.layout-1 .box-1,
-.carousel-canvas.layout-1 .box-2 { 
-  display: block;
-  grid-column: span 1;
-  grid-row: span 1;
-}
-.carousel-canvas.layout-1 .box-3,
-.carousel-canvas.layout-1 .box-4,
-.carousel-canvas.layout-1 .box-5 { display: none; }
+.carousel-canvas.layout-1-vertical .box-1,
+.carousel-canvas.layout-1-vertical .box-2 { display: block; grid-column: span 1; grid-row: span 1; }
+.carousel-canvas.layout-1-vertical .box-3,
+.carousel-canvas.layout-1-vertical .box-4,
+.carousel-canvas.layout-1-vertical .box-5 { display: none; }
 
+/* LAYOUT 1B: HORIZONTAL STACK */
+.carousel-canvas.layout-1-horizontal .layout-studio-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 6px;
+}
+.carousel-canvas.layout-1-horizontal .box-1,
+.carousel-canvas.layout-1-horizontal .box-2 { display: block; grid-column: span 1; grid-row: span 1; }
+.carousel-canvas.layout-1-horizontal .box-3,
+.carousel-canvas.layout-1-horizontal .box-4,
+.carousel-canvas.layout-1-horizontal .box-5 { display: none; }
+
+/* LAYOUT 1C: DIAGONAL CUT */
+.carousel-canvas.layout-1-diagonal .layout-studio-container {
+  display: block;
+  position: relative;
+}
+.carousel-canvas.layout-1-diagonal .box-1 {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  z-index: 2;
+  display: block;
+}
+.carousel-canvas.layout-1-diagonal .box-2 {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  z-index: 1;
+  display: block;
+}
+.carousel-canvas.layout-1-diagonal .box-3,
+.carousel-canvas.layout-1-diagonal .box-4,
+.carousel-canvas.layout-1-diagonal .box-5 { display: none; }
+
+/* LAYOUT 2: SKETCH -> MODEL -> LARGER PRINT + 2 INSETS */
 .carousel-canvas.layout-2 .layout-studio-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1.4fr;
-  gap: 8px;
+  grid-template-rows: 0.7fr 1.6fr; /* Reduced top row height to maximize bottom print image */
+  gap: 6px;
   position: relative;
 }
 .carousel-canvas.layout-2 .box-1 { grid-column: span 1; grid-row: span 1; display: block; }
@@ -363,10 +405,10 @@ body {
 .carousel-canvas.layout-2 .box-3 { grid-column: span 2; grid-row: span 1; display: block; }
 .carousel-canvas.layout-2 .box-4 {
   position: absolute;
-  bottom: 120px;
-  right: 12px;
-  width: 60px;
-  height: 60px;
+  bottom: 90px;
+  right: 10px;
+  width: 55px;
+  height: 55px;
   border: 2px solid #ff5e00;
   box-shadow: 0 4px 12px rgba(0,0,0,0.6);
   z-index: 4;
@@ -374,23 +416,24 @@ body {
 }
 .carousel-canvas.layout-2 .box-5 {
   position: absolute;
-  bottom: 120px;
-  right: 80px;
-  width: 60px;
-  height: 60px;
+  bottom: 90px;
+  right: 72px;
+  width: 55px;
+  height: 55px;
   border: 2px solid #ff5e00;
   box-shadow: 0 4px 12px rgba(0,0,0,0.6);
   z-index: 4;
   display: block;
 }
 
+/* LAYOUT 3: REFERENCE VS FINAL PRINT */
 .carousel-canvas.layout-3 .layout-studio-container {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
-.carousel-canvas.layout-3 .box-1 { flex: 0.8; display: block; }
-.carousel-canvas.layout-3 .box-2 { flex: 1.5; border: 2px solid #ff5e00; display: block; }
+.carousel-canvas.layout-3 .box-1 { flex: 0.75; display: block; }
+.carousel-canvas.layout-3 .box-2 { flex: 1.6; border: 2px solid #ff5e00; display: block; }
 .carousel-canvas.layout-3 .box-3,
 .carousel-canvas.layout-3 .box-4,
 .carousel-canvas.layout-3 .box-5 { display: none; }
