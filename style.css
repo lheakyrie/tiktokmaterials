@@ -163,6 +163,17 @@ body {
   width: 100%;
 }
 
+.control-row-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.control-row-slider input[type="range"] {
+  accent-color: #ff5e00;
+  cursor: pointer;
+}
+
 .image-controls-section {
   background: #0f1117;
   padding: 14px;
@@ -224,13 +235,19 @@ body {
   justify-content: center;
 }
 
+.bg-img-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
 .bg-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
+  transform-origin: center center;
+  transition: transform 0.05s ease-out, filter 0.05s ease-out;
 }
 
 .overlay {
@@ -238,6 +255,7 @@ body {
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
   z-index: 1;
+  transition: background 0.05s ease-out;
 }
 
 .canvas-content {
@@ -322,7 +340,7 @@ body {
   margin-top: 2px;
 }
 
-/* LAYOUT CONTAINER */
+/* LAYOUT CONTAINER FOR PRODUCT SLIDE */
 .layout-studio-container {
   position: absolute;
   top: 10px;
@@ -330,6 +348,8 @@ body {
   right: 10px;
   bottom: 80px;
   z-index: 2;
+  transition: transform 0.05s ease-out, filter 0.05s ease-out;
+  transform-origin: center center;
 }
 
 .photo-box {
@@ -376,11 +396,7 @@ body {
 .carousel-canvas.bg-geo-diagonal { background: linear-gradient(135deg, #1b1e29 0%, #0a0c10 100%); }
 .carousel-canvas.bg-spotlight { background: radial-gradient(circle at 50% 35%, #2a2f42 0%, #0f1117 80%); }
 
-/* ----------------------------------
-   HIGHLIGHT LAYOUT TEMPLATES
------------------------------------ */
-
-/* LAYOUT 1A: VERTICAL 50/50 SPLIT */
+/* TEMPLATES */
 .carousel-canvas.layout-1-vertical .layout-studio-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -391,7 +407,6 @@ body {
 .carousel-canvas.layout-1-vertical .box-2 { display: block; grid-column: span 1; grid-row: span 1; }
 .carousel-canvas.layout-1-vertical .box-3 { display: none; }
 
-/* LAYOUT 1B: HORIZONTAL STACK */
 .carousel-canvas.layout-1-horizontal .layout-studio-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -402,18 +417,14 @@ body {
 .carousel-canvas.layout-1-horizontal .box-2 { display: block; grid-column: span 1; grid-row: span 1; }
 .carousel-canvas.layout-1-horizontal .box-3 { display: none; }
 
-/* LAYOUT 2: REFERENCE IMAGE ACCURATE SPEC */
 .carousel-canvas.layout-2 .layout-studio-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 155px 1fr;
   gap: 8px;
 }
-
 .carousel-canvas.layout-2 .box-1 { grid-column: 1 / 2; grid-row: 1; display: block; }
 .carousel-canvas.layout-2 .box-2 { grid-column: 2 / 3; grid-row: 1; display: block; }
-
-/* Main Full-Width Photo Box (Box 3) */
 .carousel-canvas.layout-2 .box-3 {
   grid-column: 1 / 3;
   grid-row: 2;
@@ -421,11 +432,9 @@ body {
   position: relative;
 }
 
-/* Stacked Right Thumbnail Insets inside Box 3 */
 .inset-stack-right {
   display: none;
 }
-
 .carousel-canvas.layout-2 .inset-stack-right {
   display: flex;
   flex-direction: column;
@@ -437,7 +446,6 @@ body {
   gap: 8px;
   z-index: 6;
 }
-
 .carousel-canvas.layout-2 .inset-stack-right .box-4,
 .carousel-canvas.layout-2 .inset-stack-right .box-5 {
   flex: 1;
@@ -448,7 +456,6 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.6);
 }
 
-/* LAYOUT 3: FULL FRAME FIT ABOVE PRODUCT CARD */
 .carousel-canvas.layout-3 .layout-studio-container {
   display: flex;
   flex-direction: column;
@@ -456,13 +463,6 @@ body {
   top: 10px;
   bottom: 80px;
 }
-.carousel-canvas.layout-3 .box-1 {
-  flex: 0.8;
-  display: block;
-}
-.carousel-canvas.layout-3 .box-2 {
-  flex: 1.5;
-  border: 2px solid #ff5e00;
-  display: block;
-}
+.carousel-canvas.layout-3 .box-1 { flex: 0.8; display: block; }
+.carousel-canvas.layout-3 .box-2 { flex: 1.5; border: 2px solid #ff5e00; display: block; }
 .carousel-canvas.layout-3 .box-3 { display: none; }

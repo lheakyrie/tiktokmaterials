@@ -43,9 +43,39 @@
 
             <label>Background Image</label>
             <input type="file" id="input-hook-bg" accept="image/*" />
+
+            <!-- SLIDE 1 IMAGE ADJUSTMENTS -->
+            <div class="image-controls-section">
+              <div class="section-title">Slide 1 Background Controls</div>
+
+              <div class="control-row-slider">
+                <label for="slider-zoom">Zoom (Scale)</label>
+                <input type="range" id="slider-zoom" min="1" max="2" step="0.05" value="1" />
+              </div>
+
+              <div class="control-row-slider">
+                <label for="slider-pan-x">Pan Horizontal (X)</label>
+                <input type="range" id="slider-pan-x" min="-50" max="50" step="1" value="0" />
+              </div>
+
+              <div class="control-row-slider">
+                <label for="slider-pan-y">Pan Vertical (Y)</label>
+                <input type="range" id="slider-pan-y" min="-50" max="50" step="1" value="0" />
+              </div>
+
+              <div class="control-row-slider">
+                <label for="slider-dim">Dim (Darkness)</label>
+                <input type="range" id="slider-dim" min="0" max="0.9" step="0.05" value="0.4" />
+              </div>
+
+              <div class="control-row-slider">
+                <label for="slider-blur">Blur (px)</label>
+                <input type="range" id="slider-blur" min="0" max="20" step="1" value="0" />
+              </div>
+            </div>
           </div>
 
-          <!-- PRODUCT SLIDE INPUTS (INTEGRATED STUDIO) -->
+          <!-- PRODUCT SLIDE INPUTS -->
           <div id="section-product" class="input-section hidden">
             <label>Product / Project Name</label>
             <input type="text" id="input-prod-title" value="CUSTOM MECHANICAL BRACKET" />
@@ -55,6 +85,36 @@
 
             <label>Call to Action / Badge</label>
             <input type="text" id="input-prod-cta" value="AVAILABLE AT PINOYPROTO 3D" />
+
+            <!-- PRODUCT SLIDE IMAGE ADJUSTMENTS -->
+            <div class="image-controls-section">
+              <div class="section-title">Product Image Layout Adjustments</div>
+
+              <div class="control-row-slider">
+                <label for="slider-prod-zoom">Zoom (Scale)</label>
+                <input type="range" id="slider-prod-zoom" min="1" max="2" step="0.05" value="1" />
+              </div>
+
+              <div class="control-row-slider">
+                <label for="slider-prod-pan-x">Pan Horizontal (X)</label>
+                <input type="range" id="slider-prod-pan-x" min="-50" max="50" step="1" value="0" />
+              </div>
+
+              <div class="control-row-slider">
+                <label for="slider-prod-pan-y">Pan Vertical (Y)</label>
+                <input type="range" id="slider-prod-pan-y" min="-50" max="50" step="1" value="0" />
+              </div>
+
+              <div class="control-row-slider">
+                <label for="slider-prod-dim">Dim (Darkness)</label>
+                <input type="range" id="slider-prod-dim" min="0" max="0.9" step="0.05" value="0" />
+              </div>
+
+              <div class="control-row-slider">
+                <label for="slider-prod-blur">Blur (px)</label>
+                <input type="range" id="slider-prod-blur" min="0" max="20" step="1" value="0" />
+              </div>
+            </div>
 
             <!-- INTEGRATED IMAGE DESIGNER CONTROLS -->
             <div class="image-controls-section">
@@ -127,8 +187,10 @@
         <div id="carousel-canvas" class="carousel-canvas mode-hook layout-1-vertical bg-dark-clean">
           <div id="canvas-overlay" class="overlay"></div>
           
-          <!-- Hook Background -->
-          <img id="preview-bg" src="" alt="Background Image" class="bg-img hidden" />
+          <!-- Hook Background Image Container -->
+          <div class="bg-img-container">
+            <img id="preview-bg" src="" alt="Background Image" class="bg-img hidden" />
+          </div>
 
           <!-- INTEGRATED LAYOUT STUDIO CONTAINERS -->
           <div id="layout-studio-container" class="layout-studio-container hidden">

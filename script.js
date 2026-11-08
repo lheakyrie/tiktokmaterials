@@ -1,4 +1,4 @@
-// TAB SWITCHER (SLIDE 1 vs PRODUCT SLIDE)
+// TAB SWITCHER
 const tabHook = document.getElementById('tab-hook');
 const tabProduct = document.getElementById('tab-product');
 const sectionHook = document.getElementById('section-hook');
@@ -8,6 +8,7 @@ const viewHook = document.getElementById('view-hook');
 const viewProduct = document.getElementById('view-product');
 const carouselCanvas = document.getElementById('carousel-canvas');
 const previewBg = document.getElementById('preview-bg');
+const canvasOverlay = document.getElementById('canvas-overlay');
 const layoutStudioContainer = document.getElementById('layout-studio-container');
 
 let hookBgUrl = '';
@@ -50,25 +51,72 @@ document.getElementById('input-prod-title').addEventListener('input', (e) => doc
 document.getElementById('input-prod-desc').addEventListener('input', (e) => document.getElementById('preview-prod-desc').textContent = e.target.value);
 document.getElementById('input-prod-cta').addEventListener('input', (e) => document.getElementById('preview-prod-cta').textContent = e.target.value);
 
-// DYNAMIC LABEL SELECTORS FOR BADGES
-document.getElementById('label-select-1').addEventListener('change', (e) => {
-  document.getElementById('badge-tag-1').textContent = e.target.value;
-});
-document.getElementById('label-select-2').addEventListener('change', (e) => {
-  document.getElementById('badge-tag-2').textContent = e.target.value;
-});
-document.getElementById('label-select-3').addEventListener('change', (e) => {
-  document.getElementById('badge-tag-3').textContent = e.target.value;
+// DYNAMIC LABEL SELECTORS
+document.getElementById('label-select-1').addEventListener('change', (e) => { document.getElementById('badge-tag-1').textContent = e.target.value; });
+document.getElementById('label-select-2').addEventListener('change', (e) => { document.getElementById('badge-tag-2').textContent = e.target.value; });
+document.getElementById('label-select-3').addEventListener('change', (e) => { document.getElementById('badge-tag-3').textContent = e.target.value; });
+
+// SLIDE 1 BACKGROUND UPLOAD & TRANSFORM CONTROLS
+const sliderZoom = document.getElementById('slider-zoom');
+const sliderPanX = document.getElementById('slider-pan-x');
+const sliderPanY = document.getElementById('slider-pan-y');
+const sliderDim = document.getElementById('slider-dim');
+const sliderBlur = document.getElementById('slider-blur');
+
+function applyHookImageTransforms() {
+  const scale = sliderZoom.value;
+  const panX = sliderPanX.value;
+  const panY = sliderPanY.value;
+  const blur = sliderBlur.value;
+  const dim = sliderDim.value;
+
+  previewBg.style.transform = `scale(${scale}) translate(${panX}px, ${panY}px)`;
+  previewBg.style.filter = `blur(${blur}px)`;
+  canvasOverlay.style.background = `rgba(0, 0, 0, ${dim})`;
+}
+
+[sliderZoom, sliderPanX, sliderPanY, sliderDim, sliderBlur].forEach(slider => {
+  slider.addEventListener('input', applyHookImageTransforms);
 });
 
-// HOOK BACKGROUND UPLOAD
 document.getElementById('input-hook-bg').addEventListener('change', (e) => {
   const file = e.target.files[0];
   if (file) {
     const r = new FileReader();
-    r.onload = (evt) => { hookBgUrl = evt.target.result; previewBg.src = hookBgUrl; previewBg.classList.remove('hidden'); };
+    r.onload = (evt) => { 
+      hookBgUrl = evt.target.result; 
+      previewBg.src = hookBgUrl; 
+      previewBg.classList.remove('hidden');
+      applyHookImageTransforms();
+    };
     r.readAsDataURL(file);
   }
+});
+
+// PRODUCT SLIDE IMAGE TRANSFORM CONTROLS
+const sliderProdZoom = document.getElementById('slider-prod-zoom');
+const sliderProdPanX = document.getElementById('slider-prod-pan-x');
+const sliderProdPanY = document.getElementById('slider-prod-pan-y');
+const sliderProdDim = document.getElementById('slider-prod-dim');
+const sliderProdBlur = document.getElementById('slider-prod-blur');
+
+function applyProductImageTransforms() {
+  const scale = sliderProdZoom.value;
+  const panX = sliderProdPanX.value;
+  const panY = sliderProdPanY.value;
+  const blur = sliderProdBlur.value;
+  const dim = sliderProdDim.value;
+
+  layoutStudioContainer.style.transform = `scale(${scale}) translate(${panX}px, ${panY}px)`;
+  layoutStudioContainer.style.filter = `blur(${blur}px)`;
+  
+  if (!viewProduct.classList.contains('hidden')) {
+    canvasOverlay.style.background = `rgba(0, 0, 0, ${dim})`;
+  }
+}
+
+[sliderProdZoom, sliderProdPanX, sliderProdPanY, sliderProdDim, sliderProdBlur].forEach(slider => {
+  slider.addEventListener('input', applyProductImageTransforms);
 });
 
 // INTEGRATED LAYOUT STUDIO CONTROLS
