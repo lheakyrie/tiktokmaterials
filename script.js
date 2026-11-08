@@ -92,7 +92,7 @@ document.getElementById('input-prod-img').addEventListener('change', (e) => {
   }
 });
 
-// Download Canvas as high-res PNG (1200x900px, 4:3 scale)
+// Download Canvas as high-res PNG (1200x900px, 3:4 scale)
 document.getElementById('download-btn').addEventListener('click', () => {
   html2canvas(canvas, { scale: 2 }).then((cvs) => {
     const link = document.createElement('a');
