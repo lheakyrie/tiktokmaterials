@@ -1,0 +1,145 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #0f1117;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.app-container {
+  display: flex;
+  gap: 40px;
+  max-width: 1200px;
+  width: 100%;
+  align-items: flex-start;
+}
+
+/* Control Panel Styles */
+.control-panel {
+  flex: 1;
+  background: #1b1e29;
+  padding: 25px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.control-panel h2 {
+  margin-bottom: 10px;
+  color: #ff5e00;
+}
+
+.control-panel label {
+  font-size: 0.9rem;
+  color: #a0a5b5;
+}
+
+.control-panel input, .control-panel textarea {
+  background: #0f1117;
+  border: 1px solid #2e3447;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+button#download-btn {
+  background: #ff5e00;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+
+button#download-btn:hover {
+  background: #e05300;
+}
+
+/* TikTok Preview Canvas (9:16 ratio) */
+.preview-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.tiktok-canvas {
+  position: relative;
+  width: 360px;
+  height: 640px; /* Maintains 9:16 TikTok aspect ratio */
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.tiktok-canvas #preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.tiktok-canvas .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%);
+  z-index: 1;
+}
+
+.card-content {
+  position: absolute;
+  bottom: 40px;
+  left: 20px;
+  right: 20px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.badge {
+  background: #ff5e00;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.card-content h1 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.card-content p {
+  font-size: 0.9rem;
+  color: #d1d5db;
+}
+
+.cta-box {
+  margin-top: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  font-weight: bold;
+}

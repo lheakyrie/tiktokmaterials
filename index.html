@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TikTok Post Generator - PinoyProto 3D</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- html2canvas library for exporting preview as image -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- CONTROL PANEL -->
+    <div class="control-panel">
+      <h2>TikTok Post Creator</h2>
+      
+      <label>Headline / Tagline</label>
+      <input type="text" id="input-headline" value="Custom 3D Print Showcase!" placeholder="Enter main title..." />
+
+      <label>Subheading / Details</label>
+      <textarea id="input-subtext" rows="3" placeholder="Enter description or specs...">High precision PLA print | 0.12mm layer height</textarea>
+
+      <label>Call to Action (CTA)</label>
+      <input type="text" id="input-cta" value="Order yours at PinoyProto 3D!" />
+
+      <label>Upload Product Image</label>
+      <input type="file" id="input-image" accept="image/*" />
+
+      <button id="download-btn">Download Post Image</button>
+    </div>
+
+    <!-- TIKTOK PREVIEW (9:16 Aspect Ratio) -->
+    <div class="preview-wrapper">
+      <div id="tiktok-canvas" class="tiktok-canvas">
+        <div class="overlay"></div>
+        <img id="preview-img" src="https://via.placeholder.com/1080x1920/1e1e24/fff?text=Upload+3D+Model+Image" alt="3D Model Preview" />
+        
+        <div class="card-content">
+          <span class="badge">PINOYPROTO 3D</span>
+          <h1 id="preview-headline">Custom 3D Print Showcase!</h1>
+          <p id="preview-subtext">High precision PLA print | 0.12mm layer height</p>
+          <div class="cta-box" id="preview-cta">Order yours at PinoyProto 3D!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
