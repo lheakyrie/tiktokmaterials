@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TikTok 4:3 Carousel Generator - PinoyProto 3D</title>
+
+  <!-- Google Fonts: Anton, Bebas Neue, Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
@@ -22,7 +28,7 @@
       <!-- SLIDE 1 INPUTS -->
       <div id="section-hook" class="input-section">
         <label>Main Question / Hook</label>
-        <textarea id="input-hook-title" rows="2">Need a 3D design for your project?</textarea>
+        <textarea id="input-hook-title" rows="2">NEED A 3D DESIGN FOR YOUR PROJECT?</textarea>
 
         <label>Subtext / Lead-in</label>
         <input type="text" id="input-hook-sub" value="Swipe to see our recent 3D prints & custom models ➡️" />
@@ -34,13 +40,13 @@
       <!-- PRODUCT SLIDE INPUTS -->
       <div id="section-product" class="input-section hidden">
         <label>Product / Project Name</label>
-        <input type="text" id="input-prod-title" value="Custom Mechanical Bracket" />
+        <input type="text" id="input-prod-title" value="CUSTOM MECHANICAL BRACKET" />
 
         <label>Description / Specs</label>
         <textarea id="input-prod-desc" rows="3">PETG Material | High Stress Resistance | 0.2mm Layer Height</textarea>
 
         <label>Call to Action / Badge</label>
-        <input type="text" id="input-prod-cta" value="Available at PinoyProto 3D" />
+        <input type="text" id="input-prod-cta" value="AVAILABLE AT PINOYPROTO 3D" />
 
         <label>Upload Product Photo</label>
         <input type="file" id="input-prod-img" accept="image/*" />
@@ -59,16 +65,16 @@
         <!-- HOOK CONTENT (Slide 1) -->
         <div id="view-hook" class="canvas-content">
           <span class="brand-badge">PINOYPROTO 3D</span>
-          <h1 id="preview-hook-title">Need a 3D design for your project?</h1>
+          <h1 id="preview-hook-title">NEED A 3D DESIGN FOR YOUR PROJECT?</h1>
           <p id="preview-hook-sub">Swipe to see our recent 3D prints & custom models ➡️</p>
         </div>
 
         <!-- PRODUCT CONTENT (Slide 2+) -->
         <div id="view-product" class="canvas-content hidden">
           <div class="card-glass">
-            <h2 id="preview-prod-title">Custom Mechanical Bracket</h2>
+            <h2 id="preview-prod-title">CUSTOM MECHANICAL BRACKET</h2>
             <p id="preview-prod-desc">PETG Material | High Stress Resistance | 0.2mm Layer Height</p>
-            <div class="prod-badge" id="preview-prod-cta">Available at PinoyProto 3D</div>
+            <div class="prod-badge" id="preview-prod-cta">AVAILABLE AT PINOYPROTO 3D</div>
           </div>
         </div>
 
