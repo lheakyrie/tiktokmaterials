@@ -325,24 +325,20 @@ body {
 
 .photo-tag {
   position: absolute;
-  background: rgba(0, 0, 0, 0.78);
+  background: rgba(0, 0, 0, 0.85);
   color: #fff;
   font-family: 'Anton', sans-serif;
-  font-size: 0.6rem;
+  font-size: 0.62rem;
   letter-spacing: 0.8px;
-  padding: 2px 6px;
-  border-radius: 3px;
-  z-index: 6;
+  padding: 3px 7px;
+  border-radius: 4px;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 
 .tag-top-left {
   top: 6px;
   left: 6px;
-}
-
-.tag-bottom-right {
-  bottom: 6px;
-  right: 6px;
 }
 
 /* BACKGROUND PATTERNS */
@@ -381,14 +377,11 @@ body {
 .carousel-canvas.layout-1-horizontal .box-2 { display: block; grid-column: span 1; grid-row: span 1; }
 .carousel-canvas.layout-1-horizontal .box-3 { display: none; }
 
-/* LAYOUT 1C: DIAGONAL CUT (CONSTRAINED FRAME + BOTTOM RIGHT LABEL) */
+/* LAYOUT 1C: DIAGONAL CUT (LABEL VISIBILITY FIX) */
 .carousel-canvas.layout-1-diagonal .layout-studio-container {
   display: block;
   position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 85px;
+  inset: 0;
 }
 .carousel-canvas.layout-1-diagonal .box-1 {
   position: absolute;
@@ -404,15 +397,19 @@ body {
   z-index: 1;
   display: block;
 }
-.carousel-canvas.layout-1-diagonal #badge-tag-2 {
+
+/* Ensure Photo 2 badge is forced to bottom right & stays above all clips */
+.carousel-canvas.layout-1-diagonal .box-2 #badge-tag-2 {
+  position: absolute;
   top: auto;
   left: auto;
-  bottom: 6px;
-  right: 6px;
+  bottom: 8px;
+  right: 8px;
+  z-index: 10;
 }
 .carousel-canvas.layout-1-diagonal .box-3 { display: none; }
 
-/* LAYOUT 2: SQUARE TOP BOXES + VERTICALLY STACKED RIGHT INSETS */
+/* LAYOUT 2: SQUARE TOP BOXES + CENTERED LARGER INSETS */
 .carousel-canvas.layout-2 .layout-studio-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -428,32 +425,33 @@ body {
   position: relative;
 }
 
-/* Insets embedded vertically inside Box 3 on the Right */
-.carousel-canvas.layout-2 .box-3 .box-4 {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 48px;
-  height: 48px;
-  border: 2px solid #ff5e00;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-  z-index: 4;
-  display: block;
+/* Insets Container: Bigger (64px) & Horizontally Centered inside Box 3 */
+.inset-container-centered {
+  display: none; /* Default hidden for other layouts */
 }
 
-.carousel-canvas.layout-2 .box-3 .box-5 {
+.carousel-canvas.layout-2 .inset-container-centered {
+  display: flex;
   position: absolute;
-  top: 62px;
-  right: 8px;
-  width: 48px;
-  height: 48px;
-  border: 2px solid #ff5e00;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-  z-index: 4;
-  display: block;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 12px;
+  z-index: 5;
 }
 
-/* LAYOUT 3: ACCURATE FRAME BOUNDARY ABOVE PRODUCT CARD */
+.carousel-canvas.layout-2 .inset-container-centered .box-4,
+.carousel-canvas.layout-2 .inset-container-centered .box-5 {
+  width: 64px;
+  height: 64px;
+  border: 2px solid #ff5e00;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+  display: block;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* LAYOUT 3: FULL FRAME FIT ABOVE PRODUCT CARD */
 .carousel-canvas.layout-3 .layout-studio-container {
   display: flex;
   flex-direction: column;

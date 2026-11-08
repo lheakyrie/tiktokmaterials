@@ -117,7 +117,7 @@ function updateCanvasClasses() {
 
 document.getElementById('accent-color').addEventListener('input', (e) => {
   const color = e.target.value;
-  document.querySelectorAll('.layout-2 .box-4, .layout-2 .box-5, .layout-3 .box-2').forEach(box => box.style.borderColor = color);
+  document.querySelectorAll('.inset-container-centered .box-4, .inset-container-centered .box-5, .layout-3 .box-2').forEach(box => box.style.borderColor = color);
 });
 
 // EXPORT CANVAS AS PNG
