@@ -84,7 +84,9 @@ body {
   letter-spacing: 0.5px;
 }
 
-.control-panel input, .control-panel textarea {
+.control-panel input[type="text"], 
+.control-panel textarea,
+.control-panel input[type="file"] {
   background: #0f1117;
   border: 1px solid #2e3447;
   color: #fff;
@@ -93,6 +95,40 @@ body {
   font-size: 0.95rem;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
+}
+
+/* IMAGE ADJUSTMENTS TOOLBAR */
+.image-controls-section {
+  background: #0f1117;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #2e3447;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #ff5e00;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.control-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.control-row label {
+  font-size: 0.75rem;
+  color: #8a90a2;
+}
+
+.control-row input[type="range"] {
+  accent-color: #ff5e00;
+  cursor: pointer;
 }
 
 button#download-btn {
@@ -144,13 +180,16 @@ button#download-btn:hover {
   position: absolute;
   top: 0;
   left: 0;
+  transition: transform 0.05s ease-out;
+  transform-origin: center center;
 }
 
 .overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.75) 100%);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 1;
+  pointer-events: none;
 }
 
 .canvas-content {
