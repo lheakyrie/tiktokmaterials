@@ -52,22 +52,46 @@ body {
   justify-content: center;
 }
 
+/* FIXED-HEIGHT SCROLLABLE CONTROL PANEL */
 .control-panel {
   flex: 1;
   min-width: 320px;
   max-width: 480px;
+  max-height: calc(100vh - 120px);
   background: #1b1e29;
-  padding: 25px;
+  padding: 20px;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.scrollable-controls {
+  overflow-y: auto;
+  padding-right: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Custom Scrollbar */
+.scrollable-controls::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollable-controls::-webkit-scrollbar-track {
+  background: #0f1117;
+  border-radius: 4px;
+}
+.scrollable-controls::-webkit-scrollbar-thumb {
+  background: #ff5e00;
+  border-radius: 4px;
 }
 
 .control-panel h2 {
   font-family: 'Bebas Neue', sans-serif;
   color: #ff5e00;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   letter-spacing: 1px;
 }
 
@@ -174,13 +198,15 @@ body {
   background: #e05300;
 }
 
-/* PREVIEW CANVAS CONTAINER */
+/* STICKY PREVIEW CANVAS CONTAINER (ALWAYS IN SIGHT) */
 .preview-wrapper {
   flex: 1;
   min-width: 340px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  position: sticky;
+  top: 20px;
 }
 
 .carousel-canvas {
@@ -304,7 +330,7 @@ body {
   top: 10px;
   left: 10px;
   right: 10px;
-  bottom: 85px; /* Clear space above glass card */
+  bottom: 85px;
   z-index: 2;
 }
 
@@ -377,39 +403,7 @@ body {
 .carousel-canvas.layout-1-horizontal .box-2 { display: block; grid-column: span 1; grid-row: span 1; }
 .carousel-canvas.layout-1-horizontal .box-3 { display: none; }
 
-/* LAYOUT 1C: DIAGONAL CUT (LABEL VISIBILITY FIX) */
-.carousel-canvas.layout-1-diagonal .layout-studio-container {
-  display: block;
-  position: absolute;
-  inset: 0;
-}
-.carousel-canvas.layout-1-diagonal .box-1 {
-  position: absolute;
-  inset: 0;
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-  z-index: 2;
-  display: block;
-}
-.carousel-canvas.layout-1-diagonal .box-2 {
-  position: absolute;
-  inset: 0;
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
-  z-index: 1;
-  display: block;
-}
-
-/* Ensure Photo 2 badge is forced to bottom right & stays above all clips */
-.carousel-canvas.layout-1-diagonal .box-2 #badge-tag-2 {
-  position: absolute;
-  top: auto;
-  left: auto;
-  bottom: 8px;
-  right: 8px;
-  z-index: 10;
-}
-.carousel-canvas.layout-1-diagonal .box-3 { display: none; }
-
-/* LAYOUT 2: SQUARE TOP BOXES + CENTERED LARGER INSETS */
+/* LAYOUT 2: SQUARE TOP BOXES + RIGHT VERTICALLY STACKED INSETS */
 .carousel-canvas.layout-2 .layout-studio-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -425,25 +419,27 @@ body {
   position: relative;
 }
 
-/* Insets Container: Bigger (64px) & Horizontally Centered inside Box 3 */
-.inset-container-centered {
-  display: none; /* Default hidden for other layouts */
+/* Vertical Insets Container on the Right Side of Box 3 */
+.inset-container-vertical-right {
+  display: none;
 }
 
-.carousel-canvas.layout-2 .inset-container-centered {
+.carousel-canvas.layout-2 .inset-container-vertical-right {
   display: flex;
+  flex-direction: column;
   position: absolute;
+  top: 8px;
+  right: 8px;
   bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  gap: 12px;
+  gap: 8px;
   z-index: 5;
+  justify-content: flex-end;
 }
 
-.carousel-canvas.layout-2 .inset-container-centered .box-4,
-.carousel-canvas.layout-2 .inset-container-centered .box-5 {
-  width: 64px;
-  height: 64px;
+.carousel-canvas.layout-2 .inset-container-vertical-right .box-4,
+.carousel-canvas.layout-2 .inset-container-vertical-right .box-5 {
+  width: 58px;
+  height: 58px;
   border: 2px solid #ff5e00;
   box-shadow: 0 4px 12px rgba(0,0,0,0.7);
   display: block;
