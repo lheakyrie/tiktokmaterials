@@ -40,6 +40,7 @@ tabProduct.addEventListener('click', () => {
   layoutStudioContainer.classList.remove('hidden');
   previewBg.classList.add('hidden');
   carouselCanvas.classList.remove('mode-hook');
+  updateCanvasClasses();
 });
 
 // REAL-TIME TEXT UPDATES
@@ -67,19 +68,19 @@ const prev1 = document.getElementById('prev-img-1');
 const prev2 = document.getElementById('prev-img-2');
 const prev3 = document.getElementById('prev-img-3');
 const prev4 = document.getElementById('prev-img-4');
+const prev5 = document.getElementById('prev-img-5');
 
 document.getElementById('img-input-1').addEventListener('change', (e) => loadImg(e, prev1));
 document.getElementById('img-input-2').addEventListener('change', (e) => loadImg(e, prev2));
 document.getElementById('img-input-3').addEventListener('change', (e) => loadImg(e, prev3));
+document.getElementById('img-input-4').addEventListener('change', (e) => loadImg(e, prev4));
+document.getElementById('img-input-5').addEventListener('change', (e) => loadImg(e, prev5));
 
 function loadImg(event, targetElement) {
   const file = event.target.files[0];
   if (file) {
     const reader = new FileReader();
-    reader.onload = (e) => { 
-      targetElement.src = e.target.result;
-      if (targetElement === prev3) prev4.src = e.target.result;
-    };
+    reader.onload = (e) => { targetElement.src = e.target.result; };
     reader.readAsDataURL(file);
   }
 }
@@ -105,7 +106,7 @@ function updateCanvasClasses() {
 
 document.getElementById('accent-color').addEventListener('input', (e) => {
   const color = e.target.value;
-  document.querySelectorAll('.offset-overlap .box-2, .diagonal-geo .box-2').forEach(box => box.style.borderColor = color);
+  document.querySelectorAll('.layout-2 .box-4, .layout-2 .box-5, .layout-3 .box-2').forEach(box => box.style.borderColor = color);
 });
 
 // EXPORT CANVAS AS PNG
