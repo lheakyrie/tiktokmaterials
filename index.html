@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3D Model Layout Studio - PinoyProto 3D</title>
+  <title>PinoyProto 3D Creator Suite</title>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Anton, Bebas Neue, Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
@@ -14,94 +14,175 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
+  
+  <!-- TOP TOOLBAR NAVIGATION -->
+  <header class="workspace-header">
+    <div class="brand">PINOYPROTO 3D <span>STUDIO</span></div>
+    <nav class="tool-switcher">
+      <button id="nav-carousel" class="nav-btn active">1. Carousel Builder</button>
+      <button id="nav-designer" class="nav-btn">2. Image Designer Studio</button>
+    </nav>
+  </header>
 
-  <div class="app-container">
-    <!-- CONTROL PANEL -->
-    <div class="control-panel">
-      <h2>Image Designer Studio</h2>
-      <p class="subtitle">Design multi-photo layouts with geometric backgrounds optimized for carousel slides.</p>
-      
-      <!-- PHOTO UPLOADERS -->
-      <div class="upload-group">
-        <label>Photo 1 (Primary Model)</label>
-        <input type="file" id="img-input-1" accept="image/*" />
-
-        <label>Photo 2 (Angle / Detail)</label>
-        <input type="file" id="img-input-2" accept="image/*" />
-
-        <label>Photo 3 (Optional extra angle)</label>
-        <input type="file" id="img-input-3" accept="image/*" />
-      </div>
-
-      <!-- LAYOUT TEMPLATES -->
-      <div class="layout-selection">
-        <label>Select Multi-Photo Layout</label>
-        <div class="layout-grid">
-          <button class="preset-btn active" data-layout="hero-split">Hero Split</button>
-          <button class="preset-btn" data-layout="vertical-stack">3-Row Stack</button>
-          <button class="preset-btn" data-layout="diagonal-geo">Diagonal Geo</button>
-          <button class="preset-btn" data-layout="offset-overlap">Offset Overlap</button>
-          <button class="preset-btn" data-layout="minimal-frame">Minimal Frame</button>
-          <button class="preset-btn" data-layout="grid-4">4-Grid Matrix</button>
-        </div>
-      </div>
-
-      <!-- GEOMETRIC BACKGROUND & STYLING -->
-      <div class="style-controls">
-        <label>Background Pattern</label>
-        <select id="bg-style-select">
-          <option value="bg-dark-clean">Minimal Dark Studio</option>
-          <option value="bg-cad-grid">CAD Blueprint Grid</option>
-          <option value="bg-geo-diagonal">Diagonal Slash & Accent</option>
-          <option value="bg-spotlight">Center Spotlight Radial</option>
-        </select>
-
-        <div class="control-row">
-          <label>Accent Color</label>
-          <input type="color" id="accent-color" value="#ff5e00" />
-        </div>
-
-        <div class="control-row checkbox-row">
-          <input type="checkbox" id="toggle-safezone" checked />
-          <label for="toggle-safezone">Reserve Bottom Text Mask (Carousel Safe Area)</label>
-        </div>
-      </div>
-
-      <button id="download-btn">Export Designed Image (3:4 PNG)</button>
-    </div>
-
-    <!-- PREVIEW CANVAS (3:4 PORTRAIT) -->
-    <div class="preview-wrapper">
-      <div id="layout-canvas" class="layout-canvas hero-split bg-dark-clean">
+  <!-- TOOL 1: CAROUSEL BUILDER -->
+  <main id="section-carousel-tool" class="tool-section">
+    <div class="app-container">
+      <div class="control-panel">
+        <h2>Carousel Builder (3:4)</h2>
         
-        <!-- Geometric Accent Shapes -->
-        <div class="geo-shape shape-1"></div>
-        <div class="geo-shape shape-2"></div>
-
-        <!-- Photo Containers -->
-        <div class="photo-box box-1">
-          <img id="prev-img-1" src="https://via.placeholder.com/600x800/1b1e29/fff?text=Upload+Photo+1" alt="Photo 1" />
+        <div class="tab-group">
+          <button id="tab-hook" class="tab-btn active">Slide 1 (Hook)</button>
+          <button id="tab-product" class="tab-btn">Product Slide</button>
         </div>
 
-        <div class="photo-box box-2">
-          <img id="prev-img-2" src="https://via.placeholder.com/600x800/222634/fff?text=Upload+Photo+2" alt="Photo 2" />
+        <div id="section-hook" class="input-section">
+          <label>Main Question / Hook</label>
+          <textarea id="input-hook-title" rows="2">NEED A 3D DESIGN FOR YOUR PROJECT?</textarea>
+
+          <label>Subtext / Lead-in</label>
+          <input type="text" id="input-hook-sub" value="Swipe to see our recent 3D prints & custom models ➡️" />
+
+          <label>Background Image</label>
+          <input type="file" id="input-hook-bg" accept="image/*" />
         </div>
 
-        <div class="photo-box box-3">
-          <img id="prev-img-3" src="https://via.placeholder.com/600x800/292d3e/fff?text=Upload+Photo+3" alt="Photo 3" />
+        <div id="section-product" class="input-section hidden">
+          <label>Product / Project Name</label>
+          <input type="text" id="input-prod-title" value="CUSTOM MECHANICAL BRACKET" />
+
+          <label>Description / Specs</label>
+          <textarea id="input-prod-desc" rows="3">PETG Material | High Stress Resistance | 0.2mm Layer Height</textarea>
+
+          <label>Call to Action / Badge</label>
+          <input type="text" id="input-prod-cta" value="AVAILABLE AT PINOYPROTO 3D" />
+
+          <label>Upload Product Photo</label>
+          <input type="file" id="input-prod-img" accept="image/*" />
         </div>
 
-        <div class="photo-box box-4 hidden">
-          <img id="prev-img-4" src="https://via.placeholder.com/600x800/1e2230/fff?text=Photo+4" alt="Photo 4" />
+        <div class="image-controls-section">
+          <div class="section-title">Quick Fit Controls</div>
+          <div class="control-row">
+            <label>Zoom</label>
+            <input type="range" id="input-img-zoom" min="1" max="2.5" step="0.05" value="1" />
+          </div>
+          <div class="control-row">
+            <label>Vertical Position</label>
+            <input type="range" id="input-img-pos-y" min="-100" max="100" step="1" value="0" />
+          </div>
+          <div class="control-row">
+            <label>Dim Overlay</label>
+            <input type="range" id="input-img-dim" min="0" max="0.9" step="0.05" value="0.4" />
+          </div>
         </div>
 
-        <!-- Bottom Safe Zone Protection Mask -->
-        <div id="safezone-mask" class="safezone-mask">
-          <span>Carousel Text Overlay Safe Zone</span>
+        <button id="download-carousel-btn" class="action-btn">Download Slide (3:4 PNG)</button>
+      </div>
+
+      <div class="preview-wrapper">
+        <div id="carousel-canvas" class="carousel-canvas mode-hook">
+          <div id="canvas-overlay" class="overlay"></div>
+          <img id="preview-bg" src="" alt="Background/Product Image" class="bg-img hidden" />
+
+          <div id="view-hook" class="canvas-content">
+            <span class="brand-badge">PINOYPROTO 3D</span>
+            <h1 id="preview-hook-title">NEED A 3D DESIGN FOR YOUR PROJECT?</h1>
+            <p id="preview-hook-sub">Swipe to see our recent 3D prints & custom models ➡️</p>
+          </div>
+
+          <div id="view-product" class="canvas-content hidden">
+            <div class="card-glass">
+              <h2 id="preview-prod-title">CUSTOM MECHANICAL BRACKET</h2>
+              <p id="preview-prod-desc">PETG Material | High Stress Resistance | 0.2mm Layer Height</p>
+              <div class="prod-badge" id="preview-prod-cta">AVAILABLE AT PINOYPROTO 3D</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </main>
+
+
+  <!-- TOOL 2: IMAGE DESIGNER STUDIO -->
+  <main id="section-designer-tool" class="tool-section hidden">
+    <div class="app-container">
+      <div class="control-panel">
+        <h2>Image Designer Studio</h2>
+        <p class="subtitle">Design multi-photo layouts with geometric backgrounds optimized for carousel slides.</p>
+        
+        <div class="upload-group">
+          <label>Photo 1 (Primary Model)</label>
+          <input type="file" id="img-input-1" accept="image/*" />
+
+          <label>Photo 2 (Angle / Detail)</label>
+          <input type="file" id="img-input-2" accept="image/*" />
+
+          <label>Photo 3 (Optional extra angle)</label>
+          <input type="file" id="img-input-3" accept="image/*" />
+        </div>
+
+        <div class="layout-selection">
+          <label>Select Multi-Photo Layout</label>
+          <div class="layout-grid">
+            <button class="preset-btn active" data-layout="hero-split">Hero Split</button>
+            <button class="preset-btn" data-layout="vertical-stack">3-Row Stack</button>
+            <button class="preset-btn" data-layout="diagonal-geo">Diagonal Geo</button>
+            <button class="preset-btn" data-layout="offset-overlap">Offset Overlap</button>
+            <button class="preset-btn" data-layout="minimal-frame">Minimal Frame</button>
+            <button class="preset-btn" data-layout="grid-4">4-Grid Matrix</button>
+          </div>
+        </div>
+
+        <div class="style-controls">
+          <label>Background Pattern</label>
+          <select id="bg-style-select">
+            <option value="bg-dark-clean">Minimal Dark Studio</option>
+            <option value="bg-cad-grid">CAD Blueprint Grid</option>
+            <option value="bg-geo-diagonal">Diagonal Slash & Accent</option>
+            <option value="bg-spotlight">Center Spotlight Radial</option>
+          </select>
+
+          <div class="control-row">
+            <label>Accent Color</label>
+            <input type="color" id="accent-color" value="#ff5e00" />
+          </div>
+
+          <div class="control-row checkbox-row">
+            <input type="checkbox" id="toggle-safezone" checked />
+            <label for="toggle-safezone">Reserve Bottom Text Mask (Carousel Safe Area)</label>
+          </div>
+        </div>
+
+        <button id="download-designer-btn" class="action-btn">Export Designed Image (3:4 PNG)</button>
+      </div>
+
+      <div class="preview-wrapper">
+        <div id="layout-canvas" class="layout-canvas hero-split bg-dark-clean">
+          <div class="geo-shape shape-1"></div>
+
+          <div class="photo-box box-1">
+            <img id="prev-img-1" src="https://via.placeholder.com/600x800/1b1e29/fff?text=Upload+Photo+1" alt="Photo 1" />
+          </div>
+
+          <div class="photo-box box-2">
+            <img id="prev-img-2" src="https://via.placeholder.com/600x800/222634/fff?text=Upload+Photo+2" alt="Photo 2" />
+          </div>
+
+          <div class="photo-box box-3">
+            <img id="prev-img-3" src="https://via.placeholder.com/600x800/292d3e/fff?text=Upload+Photo+3" alt="Photo 3" />
+          </div>
+
+          <div class="photo-box box-4 hidden">
+            <img id="prev-img-4" src="https://via.placeholder.com/600x800/1e2230/fff?text=Photo+4" alt="Photo 4" />
+          </div>
+
+          <div id="safezone-mask" class="safezone-mask">
+            <span>Carousel Text Overlay Safe Zone</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
   <script src="script.js"></script>
 </body>
