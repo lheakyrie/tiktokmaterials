@@ -1,74 +1,330 @@
-const canvas = document.getElementById('layout-canvas');
-const presetBtns = document.querySelectorAll('.preset-btn');
-const bgSelect = document.getElementById('bg-style-select');
-
-// Image Elements
-const prev1 = document.getElementById('prev-img-1');
-const prev2 = document.getElementById('prev-img-2');
-const prev3 = document.getElementById('prev-img-3');
-const prev4 = document.getElementById('prev-img-4');
-
-// File Upload Listeners
-document.getElementById('img-input-1').addEventListener('change', (e) => loadImg(e, prev1));
-document.getElementById('img-input-2').addEventListener('change', (e) => loadImg(e, prev2));
-document.getElementById('img-input-3').addEventListener('change', (e) => loadImg(e, prev3));
-
-function loadImg(event, targetElement) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => { 
-      targetElement.src = e.target.result;
-      // Mirror image to photo 4 if in 4-grid mode and photo 4 is empty
-      if (targetElement === prev3) prev4.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
 }
 
-// Layout Switcher
-presetBtns.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    presetBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    
-    const layoutStyle = btn.dataset.layout;
-    const currentBg = bgSelect.value;
-    canvas.className = `layout-canvas ${layoutStyle} ${currentBg}`;
-  });
-});
+body {
+  background-color: #0f1117;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
 
-// Background Style Switcher
-bgSelect.addEventListener('change', (e) => {
-  const activeLayout = document.querySelector('.preset-btn.active').dataset.layout;
-  canvas.className = `layout-canvas ${activeLayout} ${e.target.value}`;
-});
+.app-container {
+  display: flex;
+  gap: 40px;
+  max-width: 1050px;
+  width: 100%;
+  align-items: flex-start;
+}
 
-// Accent Color Picker
-document.getElementById('accent-color').addEventListener('input', (e) => {
-  const color = e.target.value;
-  document.querySelectorAll('.preset-btn.active').forEach(b => b.style.backgroundColor = color);
-  document.querySelectorAll('.offset-overlap .box-2, .diagonal-geo .box-2').forEach(box => {
-    box.style.borderColor = color;
-  });
-});
+/* Control Panel */
+.control-panel {
+  flex: 1;
+  background: #1b1e29;
+  padding: 25px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
-// Toggle Carousel Bottom Safe Zone Overlay
-document.getElementById('toggle-safezone').addEventListener('change', (e) => {
-  document.getElementById('safezone-mask').classList.toggle('hidden', !e.target.checked);
-});
+.control-panel h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #ff5e00;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
 
-// Download Designed Canvas as High-Res PNG
-document.getElementById('download-btn').addEventListener('click', () => {
-  // Hide border dashes during export
-  const mask = document.getElementById('safezone-mask');
-  mask.style.borderTop = 'none';
+.subtitle {
+  font-size: 0.82rem;
+  color: #a0a5b5;
+  line-height: 1.4;
+}
 
-  html2canvas(canvas, { scale: 2 }).then((cvs) => {
-    const link = document.createElement('a');
-    link.download = '3d-model-designed-slide.png';
-    link.href = cvs.toDataURL('image/png');
-    link.click();
-    mask.style.borderTop = '1px dashed rgba(255, 94, 0, 0.5)';
-  });
-});
+.upload-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.control-panel label {
+  font-size: 0.75rem;
+  color: #a0a5b5;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.control-panel input[type="file"],
+.control-panel select,
+.control-panel input[type="color"] {
+  background: #0f1117;
+  border: 1px solid #2e3447;
+  color: #fff;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+/* Layout Button Grid */
+.layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.preset-btn {
+  background: #0f1117;
+  border: 1px solid #2e3447;
+  color: #8a90a2;
+  padding: 9px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.preset-btn.active {
+  background: #ff5e00;
+  color: #ffffff;
+  border-color: #ff5e00;
+}
+
+.style-controls {
+  background: #0f1117;
+  padding: 14px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.control-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.checkbox-row {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox-row label {
+  text-transform: none;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: #d1d5db;
+}
+
+button#download-btn {
+  background: #ff5e00;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 6px;
+  font-family: 'Anton', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+button#download-btn:hover {
+  background: #e05300;
+}
+
+/* 3:4 PORTRAIT CANVAS (390px wide x 520px tall) */
+.preview-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.layout-canvas {
+  position: relative;
+  width: 390px;
+  height: 520px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+  display: grid;
+  padding: 12px;
+  gap: 10px;
+  transition: background 0.3s;
+}
+
+.photo-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ----------------------------------
+   GEOMETRIC & MINIMAL BACKGROUNDS
+----------------------------------- */
+.layout-canvas.bg-dark-clean {
+  background-color: #0f1117;
+}
+
+.layout-canvas.bg-cad-grid {
+  background-color: #0d1017;
+  background-image: 
+    linear-gradient(rgba(255, 94, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 94, 0, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.layout-canvas.bg-geo-diagonal {
+  background: linear-gradient(135deg, #1b1e29 0%, #0a0c10 100%);
+}
+.layout-canvas.bg-geo-diagonal .geo-shape.shape-1 {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 94, 0, 0.15);
+  transform: rotate(45deg);
+  z-index: 1;
+}
+
+.layout-canvas.bg-spotlight {
+  background: radial-gradient(circle at 50% 35%, #2a2f42 0%, #0f1117 80%);
+}
+
+/* ----------------------------------
+   MULTI-PHOTO LAYOUT STYLES
+----------------------------------- */
+
+/* 1. Hero Split */
+.layout-canvas.hero-split {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1.4fr 1fr;
+  padding-bottom: 90px; /* space for text overlay */
+}
+.layout-canvas.hero-split .box-1 { grid-column: span 2; }
+
+/* 2. 3-Row Vertical Stack */
+.layout-canvas.vertical-stack {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  padding-bottom: 90px;
+}
+
+/* 3. Diagonal Geo */
+.layout-canvas.diagonal-geo {
+  display: block;
+  position: relative;
+  padding: 15px;
+  padding-bottom: 90px;
+}
+.layout-canvas.diagonal-geo .box-1 {
+  width: 70%;
+  height: 60%;
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+}
+.layout-canvas.diagonal-geo .box-2 {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 45%;
+  height: 55%;
+  clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
+  border: 2px solid #ff5e00;
+}
+.layout-canvas.diagonal-geo .box-3 { display: none; }
+
+/* 4. Offset Overlap */
+.layout-canvas.offset-overlap {
+  display: block;
+  position: relative;
+  padding: 20px;
+  padding-bottom: 90px;
+}
+.layout-canvas.offset-overlap .box-1 {
+  width: 75%;
+  height: 65%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+.layout-canvas.offset-overlap .box-2 {
+  position: absolute;
+  bottom: 100px;
+  right: 20px;
+  width: 55%;
+  height: 45%;
+  border: 3px solid #ff5e00;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+.layout-canvas.offset-overlap .box-3 { display: none; }
+
+/* 5. Minimal Frame */
+.layout-canvas.minimal-frame {
+  display: block;
+  padding: 25px;
+  padding-bottom: 95px;
+}
+.layout-canvas.minimal-frame .box-1 {
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(255, 94, 0, 0.4);
+  padding: 6px;
+  background: #0f1117;
+}
+.layout-canvas.minimal-frame .box-2,
+.layout-canvas.minimal-frame .box-3 { display: none; }
+
+/* 6. 4-Grid Matrix */
+.layout-canvas.grid-4 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding-bottom: 90px;
+}
+.layout-canvas.grid-4 .box-4 { display: block; }
+
+/* CAROUSEL TEXT SAFE ZONE PROTECTION MASK */
+.safezone-mask {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: linear-gradient(to top, rgba(15, 17, 23, 0.95) 0%, rgba(15, 17, 23, 0.6) 70%, transparent 100%);
+  z-index: 10;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 10px;
+  border-top: 1px dashed rgba(255, 94, 0, 0.5);
+}
+
+.safezone-mask span {
+  font-size: 0.65rem;
+  color: #ff5e00;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
