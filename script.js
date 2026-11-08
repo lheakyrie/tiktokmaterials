@@ -16,6 +16,17 @@ const adjustmentsProduct = document.getElementById('adjustments-product');
 
 let hookBgUrl = '';
 
+// STORE PER-PHOTO TRANSFORM AND FIT SETTINGS
+const photoStates = {
+  1: { zoom: 1, panX: 0, panY: 0, dim: 0, blur: 0, fit: 'cover' },
+  2: { zoom: 1, panX: 0, panY: 0, dim: 0, blur: 0, fit: 'cover' },
+  3: { zoom: 1, panX: 0, panY: 0, dim: 0, blur: 0, fit: 'cover' },
+  4: { zoom: 1, panX: 0, panY: 0, dim: 0, blur: 0, fit: 'cover' },
+  5: { zoom: 1, panX: 0, panY: 0, dim: 0, blur: 0, fit: 'cover' },
+};
+
+let activeBoxId = 1;
+
 tabHook.addEventListener('click', () => {
   tabHook.classList.add('active');
   tabProduct.classList.remove('active');
@@ -52,6 +63,7 @@ tabProduct.addEventListener('click', () => {
   adjustmentsHook.classList.add('hidden');
   
   updateCanvasClasses();
+  setActivePhotoBox(activeBoxId);
 });
 
 // REAL-TIME TEXT UPDATES
@@ -103,30 +115,72 @@ document.getElementById('input-hook-bg').addEventListener('change', (e) => {
   }
 });
 
-// PRODUCT SLIDE IMAGE TRANSFORM CONTROLS
+// PRODUCT SLIDE INDIVIDUAL PHOTO ADJUSTMENTS
+const selectTargetBox = document.getElementById('select-target-box');
+const selectFitMode = document.getElementById('select-fit-mode');
 const sliderProdZoom = document.getElementById('slider-prod-zoom');
 const sliderProdPanX = document.getElementById('slider-prod-pan-x');
 const sliderProdPanY = document.getElementById('slider-prod-pan-y');
 const sliderProdDim = document.getElementById('slider-prod-dim');
 const sliderProdBlur = document.getElementById('slider-prod-blur');
 
-function applyProductImageTransforms() {
-  const scale = sliderProdZoom.value;
-  const panX = sliderProdPanX.value;
-  const panY = sliderProdPanY.value;
-  const blur = sliderProdBlur.value;
-  const dim = sliderProdDim.value;
+function setActivePhotoBox(boxId) {
+  activeBoxId = boxId;
+  selectTargetBox.value = boxId;
 
-  layoutStudioContainer.style.transform = `scale(${scale}) translate(${panX}px, ${panY}px)`;
-  layoutStudioContainer.style.filter = `blur(${blur}px)`;
-  
-  if (!viewProduct.classList.contains('hidden')) {
-    canvasOverlay.style.background = `rgba(0, 0, 0, ${dim})`;
+  document.querySelectorAll('.photo-box').forEach(box => {
+    box.classList.toggle('active-box', parseInt(box.dataset.box) === parseInt(boxId));
+  });
+
+  const state = photoStates[boxId];
+  selectFitMode.value = state.fit;
+  sliderProdZoom.value = state.zoom;
+  sliderProdPanX.value = state.panX;
+  sliderProdPanY.value = state.panY;
+  sliderProdDim.value = state.dim;
+  sliderProdBlur.value = state.blur;
+}
+
+selectTargetBox.addEventListener('change', (e) => {
+  setActivePhotoBox(parseInt(e.target.value));
+});
+
+// CANVAS CLICK TO SELECT FRAME
+document.querySelectorAll('.photo-box').forEach(box => {
+  box.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setActivePhotoBox(parseInt(box.dataset.box));
+  });
+});
+
+function applyActivePhotoTransforms() {
+  const boxId = activeBoxId;
+  const state = photoStates[boxId];
+
+  state.fit = selectFitMode.value;
+  state.zoom = parseFloat(sliderProdZoom.value);
+  state.panX = parseFloat(sliderProdPanX.value);
+  state.panY = parseFloat(sliderProdPanY.value);
+  state.dim = parseFloat(sliderProdDim.value);
+  state.blur = parseFloat(sliderProdBlur.value);
+
+  const img = document.getElementById(`prev-img-${boxId}`);
+  const blurBackdrop = document.getElementById(`bg-blur-${boxId}`);
+
+  img.style.objectFit = state.fit;
+  img.style.transform = `scale(${state.zoom}) translate(${state.panX}px, ${state.panY}px)`;
+  img.style.filter = `blur(${state.blur}px) brightness(${1 - state.dim})`;
+
+  if (state.fit === 'contain') {
+    blurBackdrop.style.display = 'block';
+  } else {
+    blurBackdrop.style.display = 'none';
   }
 }
 
-[sliderProdZoom, sliderProdPanX, sliderProdPanY, sliderProdDim, sliderProdBlur].forEach(slider => {
-  slider.addEventListener('input', applyProductImageTransforms);
+[selectFitMode, sliderProdZoom, sliderProdPanX, sliderProdPanY, sliderProdDim, sliderProdBlur].forEach(ctrl => {
+  ctrl.addEventListener('input', applyActivePhotoTransforms);
+  ctrl.addEventListener('change', applyActivePhotoTransforms);
 });
 
 // INTEGRATED LAYOUT STUDIO CONTROLS
@@ -139,17 +193,22 @@ const prev3 = document.getElementById('prev-img-3');
 const prev4 = document.getElementById('prev-img-4');
 const prev5 = document.getElementById('prev-img-5');
 
-document.getElementById('img-input-1').addEventListener('change', (e) => loadImg(e, prev1));
-document.getElementById('img-input-2').addEventListener('change', (e) => loadImg(e, prev2));
-document.getElementById('img-input-3').addEventListener('change', (e) => loadImg(e, prev3));
-document.getElementById('img-input-4').addEventListener('change', (e) => loadImg(e, prev4));
-document.getElementById('img-input-5').addEventListener('change', (e) => loadImg(e, prev5));
+document.getElementById('img-input-1').addEventListener('change', (e) => loadImg(e, 1));
+document.getElementById('img-input-2').addEventListener('change', (e) => loadImg(e, 2));
+document.getElementById('img-input-3').addEventListener('change', (e) => loadImg(e, 3));
+document.getElementById('img-input-4').addEventListener('change', (e) => loadImg(e, 4));
+document.getElementById('img-input-5').addEventListener('change', (e) => loadImg(e, 5));
 
-function loadImg(event, targetElement) {
+function loadImg(event, boxId) {
   const file = event.target.files[0];
   if (file) {
     const reader = new FileReader();
-    reader.onload = (e) => { targetElement.src = e.target.result; };
+    reader.onload = (e) => { 
+      const srcUrl = e.target.result;
+      document.getElementById(`prev-img-${boxId}`).src = srcUrl;
+      document.getElementById(`bg-blur-${boxId}`).src = srcUrl;
+      applyActivePhotoTransforms();
+    };
     reader.readAsDataURL(file);
   }
 }

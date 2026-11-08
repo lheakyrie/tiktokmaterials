@@ -57,52 +57,53 @@
             <input type="text" id="input-prod-cta" value="AVAILABLE AT PINOYPROTO 3D" />
 
             <!-- INTEGRATED IMAGE DESIGNER CONTROLS -->
-<div class="image-controls-section">
-  <div class="section-title">Design Highlight Layouts</div>
+            <div class="image-controls-section">
+              <div class="section-title">Design Highlight Layouts</div>
 
-  <!-- 1. LAYOUT TEMPLATES MOVED TO THE TOP -->
-  <label>Highlight Layout Templates</label>
-  <div class="layout-grid">
-    <button class="preset-btn active" data-layout="layout-1-vertical">Layout 1A: Before & After Split (Vertical)</button>
-    <button class="preset-btn" data-layout="layout-1-horizontal">Layout 1B: Before & After Stack (Horizontal)</button>
-    <button class="preset-btn" data-layout="layout-2">Layout 2: Reference Multi-Panel Showcase</button>
-    <button class="preset-btn" data-layout="layout-3">Layout 3: Reference vs Final Print</button>
-  </div>
+              <!-- LAYOUT TEMPLATES -->
+              <label>Highlight Layout Templates</label>
+              <div class="layout-grid">
+                <button class="preset-btn active" data-layout="layout-1-vertical">Layout 1A: Before & After Split (Vertical)</button>
+                <button class="preset-btn" data-layout="layout-1-horizontal">Layout 1B: Before & After Stack (Horizontal)</button>
+                <button class="preset-btn" data-layout="layout-2">Layout 2: Reference Multi-Panel Showcase</button>
+                <button class="preset-btn" data-layout="layout-3">Layout 3: Reference vs Final Print</button>
+              </div>
 
-  <!-- 2. PHOTO UPLOADS & BADGES NOW BELOW LAYOUT SELECTION -->
-  <div class="upload-group">
-    <label>Photo 1 (Top Left)</label>
-    <input type="file" id="img-input-1" accept="image/*" />
-    <select id="label-select-1" class="label-dropdown">
-      <option value="BEFORE: CLIENT SKETCH">Badge: BEFORE: CLIENT SKETCH</option>
-      <option value="REFERENCE">Badge: REFERENCE</option>
-      <option value="SKETCH">Badge: SKETCH</option>
-      <option value="OUR 3D MODEL">Badge: OUR 3D MODEL</option>
-    </select>
+              <!-- PHOTO UPLOADS & BADGES -->
+              <div class="upload-group">
+                <label>Photo 1 (Top Left)</label>
+                <input type="file" id="img-input-1" accept="image/*" />
+                <select id="label-select-1" class="label-dropdown">
+                  <option value="BEFORE: CLIENT SKETCH">Badge: BEFORE: CLIENT SKETCH</option>
+                  <option value="REFERENCE">Badge: REFERENCE</option>
+                  <option value="SKETCH">Badge: SKETCH</option>
+                  <option value="OUR 3D MODEL">Badge: OUR 3D MODEL</option>
+                </select>
 
-    <label>Photo 2 (Top Right)</label>
-    <input type="file" id="img-input-2" accept="image/*" />
-    <select id="label-select-2" class="label-dropdown">
-      <option value="AFTER: 3D MODEL">Badge: AFTER: 3D MODEL</option>
-      <option value="OUR 3D MODEL">Badge: OUR 3D MODEL</option>
-      <option value="EXPLODED CAD VIEW">Badge: EXPLODED CAD VIEW</option>
-      <option value="FINAL 3D PRINT">Badge: FINAL 3D PRINT</option>
-    </select>
+                <label>Photo 2 (Top Right)</label>
+                <input type="file" id="img-input-2" accept="image/*" />
+                <select id="label-select-2" class="label-dropdown">
+                  <option value="AFTER: 3D MODEL">Badge: AFTER: 3D MODEL</option>
+                  <option value="OUR 3D MODEL">Badge: OUR 3D MODEL</option>
+                  <option value="EXPLODED CAD VIEW">Badge: EXPLODED CAD VIEW</option>
+                  <option value="FINAL 3D PRINT">Badge: FINAL 3D PRINT</option>
+                </select>
 
-    <label>Photo 3 (Bottom Main Showcase)</label>
-    <input type="file" id="img-input-3" accept="image/*" />
-    <select id="label-select-3" class="label-dropdown">
-      <option value="AFTER: OUR 3D PRINTS">Badge: AFTER: OUR 3D PRINTS</option>
-      <option value="FINAL 3D PRINT">Badge: FINAL 3D PRINT</option>
-      <option value="OUR 3D MODEL">Badge: OUR 3D MODEL</option>
-    </select>
+                <label>Photo 3 (Bottom Main Showcase)</label>
+                <input type="file" id="img-input-3" accept="image/*" />
+                <select id="label-select-3" class="label-dropdown">
+                  <option value="AFTER: OUR 3D PRINTS">Badge: AFTER: OUR 3D PRINTS</option>
+                  <option value="FINAL 3D PRINT">Badge: FINAL 3D PRINT</option>
+                  <option value="OUR 3D MODEL">Badge: OUR 3D MODEL</option>
+                </select>
 
-    <label>Photo 4 (Bottom Right - Inset Top)</label>
-    <input type="file" id="img-input-4" accept="image/*" />
+                <label>Photo 4 (Bottom Right - Inset Top)</label>
+                <input type="file" id="img-input-4" accept="image/*" />
 
-    <label>Photo 5 (Bottom Right - Inset Bottom)</label>
-    <input type="file" id="img-input-5" accept="image/*" />
-  </div>
+                <label>Photo 5 (Bottom Right - Inset Bottom)</label>
+                <input type="file" id="img-input-5" accept="image/*" />
+              </div>
+
               <label>Background Pattern</label>
               <select id="bg-style-select">
                 <option value="bg-dark-clean">Minimal Dark Studio</option>
@@ -135,29 +136,44 @@
           <!-- INTEGRATED LAYOUT STUDIO CONTAINERS -->
           <div id="layout-studio-container" class="layout-studio-container hidden">
             <!-- Top Box 1 -->
-            <div class="photo-box box-1">
+            <div class="photo-box box-1 active-box" data-box="1">
+              <img id="bg-blur-1" class="blur-backdrop" src="https://via.placeholder.com/600x800/1b1e29/fff?text=Client+Sketch" alt="" />
               <span id="badge-tag-1" class="photo-tag tag-top-left">BEFORE: CLIENT SKETCH</span>
-              <img id="prev-img-1" src="https://via.placeholder.com/600x800/1b1e29/fff?text=Client+Sketch" alt="Photo 1" />
+              <div class="img-wrapper">
+                <img id="prev-img-1" src="https://via.placeholder.com/600x800/1b1e29/fff?text=Client+Sketch" alt="Photo 1" />
+              </div>
             </div>
 
             <!-- Top Box 2 -->
-            <div class="photo-box box-2">
+            <div class="photo-box box-2" data-box="2">
+              <img id="bg-blur-2" class="blur-backdrop" src="https://via.placeholder.com/600x800/222634/fff?text=3D+Model+Render" alt="" />
               <span id="badge-tag-2" class="photo-tag tag-top-left">AFTER: 3D MODEL</span>
-              <img id="prev-img-2" src="https://via.placeholder.com/600x800/222634/fff?text=3D+Model+Render" alt="Photo 2" />
+              <div class="img-wrapper">
+                <img id="prev-img-2" src="https://via.placeholder.com/600x800/222634/fff?text=3D+Model+Render" alt="Photo 2" />
+              </div>
             </div>
 
             <!-- Bottom Main Showcase Box 3 -->
-            <div class="photo-box box-3">
+            <div class="photo-box box-3" data-box="3">
+              <img id="bg-blur-3" class="blur-backdrop" src="https://via.placeholder.com/600x800/292d3e/fff?text=Finished+3D+Print" alt="" />
               <span id="badge-tag-3" class="photo-tag tag-top-left">AFTER: OUR 3D PRINTS</span>
-              <img id="prev-img-3" src="https://via.placeholder.com/600x800/292d3e/fff?text=Finished+3D+Print" alt="Photo 3" />
+              <div class="img-wrapper">
+                <img id="prev-img-3" src="https://via.placeholder.com/600x800/292d3e/fff?text=Finished+3D+Print" alt="Photo 3" />
+              </div>
               
               <!-- Embedded Stacked Right Insets for Layout 2 -->
               <div class="inset-stack-right">
-                <div class="photo-box box-4">
-                  <img id="prev-img-4" src="https://via.placeholder.com/600x800/1e2230/fff?text=Detail+1" alt="Inset 1" />
+                <div class="photo-box box-4" data-box="4">
+                  <img id="bg-blur-4" class="blur-backdrop" src="https://via.placeholder.com/600x800/1e2230/fff?text=Detail+1" alt="" />
+                  <div class="img-wrapper">
+                    <img id="prev-img-4" src="https://via.placeholder.com/600x800/1e2230/fff?text=Detail+1" alt="Inset 1" />
+                  </div>
                 </div>
-                <div class="photo-box box-5">
-                  <img id="prev-img-5" src="https://via.placeholder.com/600x800/181a24/fff?text=Detail+2" alt="Inset 2" />
+                <div class="photo-box box-5" data-box="5">
+                  <img id="bg-blur-5" class="blur-backdrop" src="https://via.placeholder.com/600x800/181a24/fff?text=Detail+2" alt="" />
+                  <div class="img-wrapper">
+                    <img id="prev-img-5" src="https://via.placeholder.com/600x800/181a24/fff?text=Detail+2" alt="Inset 2" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -186,7 +202,7 @@
         <div class="preview-adjustments-panel">
           <!-- Slide 1 Controls -->
           <div id="adjustments-hook" class="image-controls-section">
-            <div class="section-title">Slide 1 Image Adjustments</div>
+            <div class="section-title">Slide 1 Background Adjustments</div>
             <div class="slider-grid">
               <div class="control-row-slider">
                 <label for="slider-zoom">Zoom</label>
@@ -211,39 +227,15 @@
             </div>
           </div>
 
-          <!-- Product Slide Controls -->
+          <!-- Product Slide Individual Photo Controls -->
           <div id="adjustments-product" class="image-controls-section hidden">
-            <div class="section-title">Product Layout Adjustments</div>
-            <div class="slider-grid">
-              <div class="control-row-slider">
-                <label for="slider-prod-zoom">Zoom</label>
-                <input type="range" id="slider-prod-zoom" min="1" max="2" step="0.05" value="1" />
-              </div>
-              <div class="control-row-slider">
-                <label for="slider-prod-dim">Dim</label>
-                <input type="range" id="slider-prod-dim" min="0" max="0.9" step="0.05" value="0" />
-              </div>
-              <div class="control-row-slider">
-                <label for="slider-prod-pan-x">Pan X</label>
-                <input type="range" id="slider-prod-pan-x" min="-50" max="50" step="1" value="0" />
-              </div>
-              <div class="control-row-slider">
-                <label for="slider-prod-pan-y">Pan Y</label>
-                <input type="range" id="slider-prod-pan-y" min="-50" max="50" step="1" value="0" />
-              </div>
-              <div class="control-row-slider full-width-slider">
-                <label for="slider-prod-blur">Blur (px)</label>
-                <input type="range" id="slider-prod-blur" min="0" max="20" step="1" value="0" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </main>
-
-  <script src="script.js"></script>
-</body>
-</html>
+            <div class="section-title">Individual Photo Adjustments</div>
+            
+            <div class="control-row-slider full-width-slider" style="margin-bottom: 6px;">
+              <label for="select-target-box">Target Photo Frame</label>
+              <select id="select-target-box" class="label-dropdown">
+                <option value="1">Photo 1 (Top Left)</option>
+                <option value="2">Photo 2 (Top Right)</option>
+                <option value="3">Photo 3 (Bottom Main)</option>
+                <option value="4">Photo 4 (Inset Top)</option>
+                <option value="5">Photo
