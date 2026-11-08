@@ -57,52 +57,52 @@
             <input type="text" id="input-prod-cta" value="AVAILABLE AT PINOYPROTO 3D" />
 
             <!-- INTEGRATED IMAGE DESIGNER CONTROLS -->
-            <div class="image-controls-section">
-              <div class="section-title">Design Highlight Layouts</div>
+<div class="image-controls-section">
+  <div class="section-title">Design Highlight Layouts</div>
 
-              <!-- PHOTO UPLOAD & CUSTOM LABEL CONTROLS -->
-              <div class="upload-group">
-                <label>Photo 1 (Top Left)</label>
-                <input type="file" id="img-input-1" accept="image/*" />
-                <select id="label-select-1" class="label-dropdown">
-                  <option value="BEFORE: CLIENT SKETCH">Badge: BEFORE: CLIENT SKETCH</option>
-                  <option value="REFERENCE">Badge: REFERENCE</option>
-                  <option value="SKETCH">Badge: SKETCH</option>
-                  <option value="OUR 3D MODEL">Badge: OUR 3D MODEL</option>
-                </select>
+  <!-- 1. LAYOUT TEMPLATES MOVED TO THE TOP -->
+  <label>Highlight Layout Templates</label>
+  <div class="layout-grid">
+    <button class="preset-btn active" data-layout="layout-1-vertical">Layout 1A: Before & After Split (Vertical)</button>
+    <button class="preset-btn" data-layout="layout-1-horizontal">Layout 1B: Before & After Stack (Horizontal)</button>
+    <button class="preset-btn" data-layout="layout-2">Layout 2: Reference Multi-Panel Showcase</button>
+    <button class="preset-btn" data-layout="layout-3">Layout 3: Reference vs Final Print</button>
+  </div>
 
-                <label>Photo 2 (Top Right)</label>
-                <input type="file" id="img-input-2" accept="image/*" />
-                <select id="label-select-2" class="label-dropdown">
-                  <option value="AFTER: 3D MODEL">Badge: AFTER: 3D MODEL</option>
-                  <option value="OUR 3D MODEL">Badge: OUR 3D MODEL</option>
-                  <option value="EXPLODED CAD VIEW">Badge: EXPLODED CAD VIEW</option>
-                  <option value="FINAL 3D PRINT">Badge: FINAL 3D PRINT</option>
-                </select>
+  <!-- 2. PHOTO UPLOADS & BADGES NOW BELOW LAYOUT SELECTION -->
+  <div class="upload-group">
+    <label>Photo 1 (Top Left)</label>
+    <input type="file" id="img-input-1" accept="image/*" />
+    <select id="label-select-1" class="label-dropdown">
+      <option value="BEFORE: CLIENT SKETCH">Badge: BEFORE: CLIENT SKETCH</option>
+      <option value="REFERENCE">Badge: REFERENCE</option>
+      <option value="SKETCH">Badge: SKETCH</option>
+      <option value="OUR 3D MODEL">Badge: OUR 3D MODEL</option>
+    </select>
 
-                <label>Photo 3 (Bottom Main Showcase)</label>
-                <input type="file" id="img-input-3" accept="image/*" />
-                <select id="label-select-3" class="label-dropdown">
-                  <option value="AFTER: OUR 3D PRINTS">Badge: AFTER: OUR 3D PRINTS</option>
-                  <option value="FINAL 3D PRINT">Badge: FINAL 3D PRINT</option>
-                  <option value="OUR 3D MODEL">Badge: OUR 3D MODEL</option>
-                </select>
+    <label>Photo 2 (Top Right)</label>
+    <input type="file" id="img-input-2" accept="image/*" />
+    <select id="label-select-2" class="label-dropdown">
+      <option value="AFTER: 3D MODEL">Badge: AFTER: 3D MODEL</option>
+      <option value="OUR 3D MODEL">Badge: OUR 3D MODEL</option>
+      <option value="EXPLODED CAD VIEW">Badge: EXPLODED CAD VIEW</option>
+      <option value="FINAL 3D PRINT">Badge: FINAL 3D PRINT</option>
+    </select>
 
-                <label>Photo 4 (Bottom Right - Inset Top)</label>
-                <input type="file" id="img-input-4" accept="image/*" />
+    <label>Photo 3 (Bottom Main Showcase)</label>
+    <input type="file" id="img-input-3" accept="image/*" />
+    <select id="label-select-3" class="label-dropdown">
+      <option value="AFTER: OUR 3D PRINTS">Badge: AFTER: OUR 3D PRINTS</option>
+      <option value="FINAL 3D PRINT">Badge: FINAL 3D PRINT</option>
+      <option value="OUR 3D MODEL">Badge: OUR 3D MODEL</option>
+    </select>
 
-                <label>Photo 5 (Bottom Right - Inset Bottom)</label>
-                <input type="file" id="img-input-5" accept="image/*" />
-              </div>
+    <label>Photo 4 (Bottom Right - Inset Top)</label>
+    <input type="file" id="img-input-4" accept="image/*" />
 
-              <label>Highlight Layout Templates</label>
-              <div class="layout-grid">
-                <button class="preset-btn active" data-layout="layout-1-vertical">Layout 1A: Before & After Split (Vertical)</button>
-                <button class="preset-btn" data-layout="layout-1-horizontal">Layout 1B: Before & After Stack (Horizontal)</button>
-                <button class="preset-btn" data-layout="layout-2">Layout 2: Reference Multi-Panel Showcase</button>
-                <button class="preset-btn" data-layout="layout-3">Layout 3: Reference vs Final Print</button>
-              </div>
-
+    <label>Photo 5 (Bottom Right - Inset Bottom)</label>
+    <input type="file" id="img-input-5" accept="image/*" />
+  </div>
               <label>Background Pattern</label>
               <select id="bg-style-select">
                 <option value="bg-dark-clean">Minimal Dark Studio</option>
